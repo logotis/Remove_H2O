@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:remove_h2o/size_config.dart';
 
-class CustomSurffixIcon extends StatelessWidget {
-  const CustomSurffixIcon({
+class CustomIcon extends StatelessWidget {
+  const CustomIcon({
     Key? key,
     required this.svgIcon,
   }) : super(key: key);
@@ -21,7 +21,7 @@ class CustomSurffixIcon extends StatelessWidget {
       ),
       child: SvgPicture.asset(
         svgIcon,
-        color: Colors.red,
+        color: Colors.black,
         height: getProportionateScreenWidth(18),
       ),
     );

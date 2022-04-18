@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeMenu extends StatelessWidget {
   const HomeMenu({
@@ -9,7 +10,8 @@ class HomeMenu extends StatelessWidget {
     this.press,
   }) : super(key: key);
 
-  final String text, icon;
+  final String text;
+  final IconData icon;
   final VoidCallback? press;
 
   @override
@@ -19,24 +21,27 @@ class HomeMenu extends StatelessWidget {
       child: TextButton(
         style: TextButton.styleFrom(
           primary: Colors.black,
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(30),
           textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          backgroundColor: Color(0xFFF5F6F9),
+          backgroundColor: Colors.grey[200],
         ),
         onPressed: press,
         child: Row(
-          children: [
-            SvgPicture.asset(
-              icon,
-              color: Color.fromARGB(255, 8, 8, 8),
-              width: 22,
-              height: 80,
-            ),
+          children: [ IconButton(
+            icon:FaIcon(icon,color: Color.fromARGB(255, 8, 8, 8),),
+            iconSize: 40,onPressed: null,
+          ),
+            // SvgPicture.asset(
+            //   icon,
+            //   color: Color.fromARGB(255, 8, 8, 8),
+            //   width: 22,
+            //   height: 80,
+            // ),
             SizedBox(width: 20),
             Expanded(child: Text(text)),
-            Icon(Icons.arrow_forward_ios),
+           // Icon(Icons.arrow_forward_ios),
           ],
         ),
       ),

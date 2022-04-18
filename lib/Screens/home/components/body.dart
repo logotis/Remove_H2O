@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:remove_h2o/reportEmergency_Screen.dart';
 
 import 'home_menu.dart';
 
@@ -12,17 +14,19 @@ class Body extends StatelessWidget {
           SizedBox(height: 20),
           HomeMenu(
             text: "Report Emergency",
-            icon: "assets/icons/User Icon.svg",
-            press: () => {},
+            icon: FontAwesomeIcons.phone,
+            press: () => {Navigator.push(context, MaterialPageRoute(builder: (context)=>ReportEmergency()))},
           ),
+          SizedBox(height: 20),
           HomeMenu(
             text: "Send a Referral",
-            icon: "assets/icons/Bell.svg",
+            icon: FontAwesomeIcons.users,
             press: () {},
           ),
+          SizedBox(height: 20),
           HomeMenu(
             text: "Send a Picture",
-            icon: "assets/icons/Settings.svg",
+            icon: FontAwesomeIcons.camera,
             press: () {},
           ),
         ],

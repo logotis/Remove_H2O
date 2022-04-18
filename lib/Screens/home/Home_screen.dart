@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:remove_h2o/Screens/aboutus_screen.dart';
-import 'package:remove_h2o/Screens/contactus_screen.dart';
+import 'package:remove_h2o/contactus/contactus_body.dart';
 import 'package:remove_h2o/Screens/home/components/body.dart';
-import 'package:remove_h2o/Screens/my_info_screen.dart';
+import 'package:remove_h2o/myInfo_screen/myInfo_Body.dart';
 import 'package:remove_h2o/Screens/share_app.dart';
 import 'package:remove_h2o/Screens/social_screen.dart';
 import 'package:remove_h2o/components/my_drawer_header.dart';
@@ -10,10 +10,10 @@ import 'package:remove_h2o/size_config.dart';
 
 class Home extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  HomeState createState() => HomeState();
 }
 
-class _HomeState extends State<Home> {
+class HomeState extends State<Home> {
   var currentPage = DrawerSections.home;
 
   @override
@@ -21,16 +21,18 @@ class _HomeState extends State<Home> {
     var container;
     if (currentPage == DrawerSections.home) {
       container = Body();
-    } else if (currentPage == DrawerSections.contacts) {
-      container = ctspage();
-    } else if (currentPage == DrawerSections.aboutus) {
+    }
+    else if (currentPage == DrawerSections.contacts) {
+      container = ContactusBody();
+    }
+    else if (currentPage == DrawerSections.aboutus) {
       container = abtpage();
     } else if (currentPage == DrawerSections.socialmedia) {
       container = socialpage();
     } else if (currentPage == DrawerSections.shareapp) {
       container = shrappage();
     } else if (currentPage == DrawerSections.myinfo) {
-      container = infopage();
+      container = Infoscreenbody();
     }
     return Scaffold(
       appBar: AppBar(
@@ -63,20 +65,28 @@ class _HomeState extends State<Home> {
   Widget MyDrawerList() {
     return Container(
       padding: EdgeInsets.only(
-        top: 15,
+        top: 0,
       ),
       child: Column(children: [
+        Divider(thickness: 3,),
         menuItem(1, "Home", Icons.dashboard_outlined,
             currentPage == DrawerSections.home ? true : false),
+        Divider(thickness: 3),
         menuItem(2, "Contact Us", Icons.people_alt_outlined,
             currentPage == DrawerSections.contacts ? true : false),
+        Divider(thickness: 3,),
         menuItem(3, "About Us", Icons.event,
             currentPage == DrawerSections.aboutus ? true : false),
+        Divider(thickness: 3,),
         menuItem(4, "Social Media", Icons.notes,
             currentPage == DrawerSections.socialmedia ? true : false),
-        Divider(),
-        menuItem(5, "My info", Icons.person_outlined,
+        Divider(thickness: 3,),
+        menuItem(5, "Share App", Icons.share,
+            currentPage == DrawerSections.shareapp? true : false),
+        Divider(thickness: 3,),
+        menuItem(6, "My info", Icons.person_outlined,
             currentPage == DrawerSections.myinfo ? true : false),
+        Divider(thickness: 3,),
       ]),
     );
   }

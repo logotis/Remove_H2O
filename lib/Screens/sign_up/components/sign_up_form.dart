@@ -39,18 +39,19 @@ class _SignUpFormState extends State<SignUpForm> {
       key: _formKey,
       child: Column(
         children: [
+          SizedBox(height: 20,),
           buildfnameFormField(),
-          SizedBox(height: getProportionateScreenHeight(10)),
-          buildEmailFormField(),
-          SizedBox(height: getProportionateScreenHeight(10)),
+          SizedBox(height: getProportionateScreenHeight(15)),
+          buildlastnameFormField(),
+          SizedBox(height: getProportionateScreenHeight(15)),
           buildphonenumberFormField(),
-          SizedBox(height: getProportionateScreenHeight(10)),
-          buildwctrFormField(),
-          SizedBox(height: getProportionateScreenHeight(10)),
+          SizedBox(height: getProportionateScreenHeight(15)),
+          buildEmailFormField(),
+          SizedBox(height: getProportionateScreenHeight(15)),
           buildPasswordFormField(),
-          SizedBox(height: getProportionateScreenHeight(10)),
+          SizedBox(height: getProportionateScreenHeight(15)),
           FormError(errors: errors),
-          SizedBox(height: getProportionateScreenHeight(10)),
+          SizedBox(height: getProportionateScreenHeight(15)),
           GreetButtonTwo(
             text: "Continue",
             press: () {
@@ -75,7 +76,7 @@ class _SignUpFormState extends State<SignUpForm> {
         labelText: "Password",
         hintText: "Enter Your Password",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
+        suffixIcon: CustomIcon(svgIcon: "assets/icons/Lock.svg"),
       ),
     );
   }
@@ -86,7 +87,7 @@ class _SignUpFormState extends State<SignUpForm> {
         labelText: "Email",
         hintText: "Enter Your Email",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
+        suffixIcon: CustomIcon(svgIcon: "assets/icons/Mail.svg"),
       ),
     );
   }
@@ -94,10 +95,10 @@ class _SignUpFormState extends State<SignUpForm> {
   TextFormField buildfnameFormField() {
     return TextFormField(
       decoration: InputDecoration(
-        labelText: "FullName",
-        hintText: "Enter your fullname",
+        labelText: "First Name",
+        hintText: "Enter your First Name",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
+        suffixIcon: CustomIcon(svgIcon: "assets/icons/User Icon.svg"),
       ),
     );
   }
@@ -106,20 +107,20 @@ class _SignUpFormState extends State<SignUpForm> {
     return TextFormField(
       decoration: InputDecoration(
         labelText: "Phone#",
-        hintText: "Enter your phone#",
+        hintText: "Enter your Phone#",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
+        suffixIcon: CustomIcon(svgIcon: "assets/icons/Phone.svg"),
       ),
     );
   }
 
-  TextFormField buildwctrFormField() {
+  TextFormField buildlastnameFormField() {
     return TextFormField(
       decoration: InputDecoration(
-        labelText: "Category#",
-        hintText: "Enter your category",
+        labelText: "Last Name",
+        hintText: "Enter your Last Name",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
+        suffixIcon: CustomIcon(svgIcon: "assets/icons/User Icon.svg"),
       ),
     );
   }

@@ -14,23 +14,35 @@ class Body extends StatelessWidget {
             EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: SizeConfig.screenHeight * 0.05),
-              Text(
-                "OTP Verification",
-                style: headingStyle,
+              // CircleAvatar( backgroundColor: Colors.black,
+              //   radius: 16,
+              //   child: IconButton(onPressed: (){Navigator.pop(context);
+              //   },  icon: Padding(
+              //     padding: const EdgeInsets.only(left: 2.0,bottom: 1),
+              //     child: Icon(Icons.arrow_back_ios,size: 18),
+              //   ),)),
+              Column(
+                children: [
+                  SizedBox(height: SizeConfig.screenHeight * 0.05),
+                  Text(
+                    "OTP Verification",
+                    style: headingStyle,
+                  ),
+                  Text("We sent your code to +1 898 860 ***"),
+                  buildTimer(),
+                  OtpForm(),
+                  SizedBox(height: SizeConfig.screenHeight * 0.1),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      "Resend OTP Code",
+                      style: TextStyle(decoration: TextDecoration.underline),
+                    ),
+                  )
+                ],
               ),
-              Text("We sent your code to +1 898 860 ***"),
-              buildTimer(),
-              OtpForm(),
-              SizedBox(height: SizeConfig.screenHeight * 0.1),
-              GestureDetector(
-                onTap: () {},
-                child: Text(
-                  "Resend OTP Code",
-                  style: TextStyle(decoration: TextDecoration.underline),
-                ),
-              )
             ],
           ),
         ),

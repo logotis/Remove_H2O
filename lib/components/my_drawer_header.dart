@@ -3,10 +3,10 @@ import 'package:remove_h2o/size_config.dart';
 
 class MyHeaderDrawer extends StatefulWidget {
   @override
-  _MyHeaderDrawerState createState() => _MyHeaderDrawerState();
+  MyHeaderDrawerState createState() => MyHeaderDrawerState();
 }
 
-class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
+class MyHeaderDrawerState extends State<MyHeaderDrawer> {
   @override
   Widget build(BuildContext context) {
     return Container(
