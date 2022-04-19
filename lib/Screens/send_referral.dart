@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:remove_h2o/Screens/home/Home_screen.dart';
 import 'package:remove_h2o/size_config.dart';
 
-class ShareApp extends StatelessWidget {
+class SendReferral extends StatelessWidget {
   // final IconData icon;
   // const socialpage({Key? key,
   //   required this.icon}) : super(key: key);
@@ -12,6 +12,20 @@ class ShareApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        iconTheme: IconThemeData(
+          color: Colors.blue,
+        ),
+        toolbarHeight: 90,
+        backgroundColor: Colors.white,
+        brightness: Brightness.light,
+        centerTitle: true,
+        title: Image.asset(
+          "assets/images/logo.png",
+          height: getProportionateScreenHeight(270),
+        ),
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         child: Container(

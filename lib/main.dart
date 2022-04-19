@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Remove H2O',
       home: strsplash(),
       theme: theme(),
-      // We use routeName so that we dont need to remember the name
+      // We use routeName so that we don't need to remember the name
     );
   }
 }

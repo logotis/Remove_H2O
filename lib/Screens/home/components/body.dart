@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:remove_h2o/reportEmergency_Screen.dart';
+import 'package:remove_h2o/Screens/send_referral.dart';
+import 'package:remove_h2o/Screens/reportEmergency_Screen.dart';
+import 'package:remove_h2o/take_photo.dart';
 
 import 'home_menu.dart';
 
@@ -21,13 +23,13 @@ class Body extends StatelessWidget {
           HomeMenu(
             text: "Send a Referral",
             icon: FontAwesomeIcons.users,
-            press: () {},
+            press: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>SendReferral()));},
           ),
           SizedBox(height: 20),
           HomeMenu(
             text: "Send a Picture",
             icon: FontAwesomeIcons.camera,
-            press: () {},
+            press: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>PhotoData()));},
           ),
         ],
       ),

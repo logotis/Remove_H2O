@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:remove_h2o/Screens/aboutus_screen.dart';
+import 'package:remove_h2o/Screens/share_app.dart';
 import 'package:remove_h2o/contactus/contactus_body.dart';
 import 'package:remove_h2o/Screens/home/components/body.dart';
 import 'package:remove_h2o/myInfo_screen/myInfo_Body.dart';
-import 'package:remove_h2o/Screens/share_app.dart';
-import 'package:remove_h2o/Screens/social_screen.dart';
 import 'package:remove_h2o/components/my_drawer_header.dart';
 import 'package:remove_h2o/size_config.dart';
 
@@ -19,6 +18,7 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     var container;
+
     if (currentPage == DrawerSections.home) {
       container = Body();
     }
@@ -27,11 +27,14 @@ class HomeState extends State<Home> {
     }
     else if (currentPage == DrawerSections.aboutus) {
       container = abtpage();
-    } else if (currentPage == DrawerSections.socialmedia) {
-      container = socialpage();
-    } else if (currentPage == DrawerSections.shareapp) {
-      container = shrappage();
-    } else if (currentPage == DrawerSections.myinfo) {
+    }
+    // else if (currentPage == DrawerSections.socialmedia) {
+    //   container = socialpage();
+    // }
+    else if (currentPage == DrawerSections.shareapp) {
+      container = ShareApp();
+    }
+    else if (currentPage == DrawerSections.myinfo) {
       container = Infoscreenbody();
     }
     return Scaffold(
@@ -77,9 +80,9 @@ class HomeState extends State<Home> {
         Divider(thickness: 3,),
         menuItem(3, "About Us", Icons.event,
             currentPage == DrawerSections.aboutus ? true : false),
-        Divider(thickness: 3,),
-        menuItem(4, "Social Media", Icons.notes,
-            currentPage == DrawerSections.socialmedia ? true : false),
+        // Divider(thickness: 3,),
+        // menuItem(4, "Social Media", Icons.notes,
+        //     currentPage == DrawerSections.socialmedia ? true : false),
         Divider(thickness: 3,),
         menuItem(5, "Share App", Icons.share,
             currentPage == DrawerSections.shareapp? true : false),
