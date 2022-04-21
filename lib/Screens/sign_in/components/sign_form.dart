@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:remove_h2o/Screens/forgot_password/forgot_password_screen.dart';
 import 'package:remove_h2o/Screens/home/Home_screen.dart';
@@ -9,14 +11,39 @@ import 'package:remove_h2o/helper/keyboard.dart';
 import '../../../size_config.dart';
 
 class SignForm extends StatefulWidget {
+  SignForm(this.submitFunction);
+
+  final void Function(
+    String email,
+    String password,
+  ) submitFunction;
+
   @override
   _SignFormState createState() => _SignFormState();
 }
 
 class _SignFormState extends State<SignForm> {
   final _formKey = GlobalKey<FormState>();
-  String? email;
-  String? password;
+  TextEditingController emailcontroller = TextEditingController();
+  TextEditingController paswordcontroller = TextEditingController();
+
+  void trySubmit() {
+    final isValid = _formKey.currentState!.validate();
+
+    if (isValid) {
+      _formKey.currentState!.save();
+      widget.submitFunction(
+        emailcontroller.text.trim(),
+        paswordcontroller.text.trim(),
+      );
+      print(emailcontroller);
+
+      print(paswordcontroller);
+    }
+  }
+
+  // String? email;
+  // String? password;
   bool? remember = false;
   final List<String?> errors = [];
 
@@ -83,6 +110,7 @@ class _SignFormState extends State<SignForm> {
           GreetButtonTwo(
             text: "Continue",
             press: () {
+              trySubmit();
               // if all are valid then go to success screen
               KeyboardUtil.hideKeyboard(context);
               Navigator.push(
@@ -96,6 +124,7 @@ class _SignFormState extends State<SignForm> {
 
   TextFormField buildPasswordFormField() {
     return TextFormField(
+      controller: paswordcontroller,
       decoration: InputDecoration(
         labelText: "Password",
         hintText: "Enter your password",
@@ -109,6 +138,7 @@ class _SignFormState extends State<SignForm> {
 
   TextFormField buildEmailFormField() {
     return TextFormField(
+      controller: emailcontroller,
       decoration: InputDecoration(
         labelText: "Email",
         hintText: "Enter your email",

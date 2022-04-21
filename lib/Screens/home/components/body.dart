@@ -10,6 +10,7 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
       padding: EdgeInsets.symmetric(vertical: 20),
       child: Column(
         children: [
@@ -29,6 +30,18 @@ class Body extends StatelessWidget {
           HomeMenu(
             text: "Send a Picture",
             icon: FontAwesomeIcons.camera,
+            press: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>PhotoData()));},
+          ),
+          SizedBox(height: 20),
+          HomeMenu(
+            text: "User's List",
+            icon: FontAwesomeIcons.list,
+            press: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>PhotoData()));},
+          ),
+          SizedBox(height: 20),
+          HomeMenu(
+            text: "Finance",
+            icon: FontAwesomeIcons.lineChart,
             press: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>PhotoData()));},
           ),
         ],
