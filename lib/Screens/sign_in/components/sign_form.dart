@@ -112,9 +112,9 @@ class _SignFormState extends State<SignForm> {
             press: () {
               trySubmit();
               // if all are valid then go to success screen
-              KeyboardUtil.hideKeyboard(context);
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Home()));
+              // KeyboardUtil.hideKeyboard(context);
+              // Navigator.push(
+              //     context, MaterialPageRoute(builder: (context) => Home()));
             },
           ),
         ],

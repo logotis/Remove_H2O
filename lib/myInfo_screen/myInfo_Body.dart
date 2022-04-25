@@ -5,7 +5,6 @@ import 'package:remove_h2o/myInfo_screen/my_info_screen.dart';
 import 'package:remove_h2o/profileUpdate_appinfo/upgradeAddress.dart';
 import 'package:remove_h2o/profileUpdate_appinfo/upgradeEmail.dart';
 import 'package:remove_h2o/profileUpdate_appinfo/upgradeNumber.dart';
-import 'package:remove_h2o/take_photo.dart';
 
 class Infoscreenbody extends StatelessWidget {
   @override

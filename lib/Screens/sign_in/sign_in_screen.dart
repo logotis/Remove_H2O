@@ -1,12 +1,16 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unnecessary_this, avoid_print
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:remove_h2o/Screens/aboutus_screen.dart';
 import 'package:remove_h2o/Screens/home/Home_screen.dart';
 import 'package:remove_h2o/Screens/sign_in/components/sign_form.dart';
 import 'package:remove_h2o/components/no_account_text.dart';
 import 'package:remove_h2o/components/socal_card.dart';
+import 'package:remove_h2o/enum.dart';
 import 'package:remove_h2o/helper/keyboard.dart';
 import 'package:remove_h2o/size_config.dart';
 
@@ -30,6 +34,41 @@ class _SignInScreenState extends State<SignInScreen> {
     try {
       userCredential = await auth.signInWithEmailAndPassword(
           email: email, password: password);
+      print(userCredential);
+      //  final user=   FirebaseFirestore.instance
+      //         .collection('User')
+      //         .where('email', isEqualTo: userCredential.user!.email)
+      //         .get();
+
+      FirebaseFirestore.instance
+          .collection('Users')
+          .where('email', isEqualTo: userCredential.user!.email)
+          .get()
+          .then((QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          print(doc["role"]);
+
+          if (doc["approved"] != true) {
+            
+            Text('User is pending verification');
+            
+          } else {
+            if (doc['role'] == Roles.superadmin) {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => Home()));
+            } else if (doc['role'] == Roles.admin) {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => Home()));
+            } else if (doc['role'] == Roles.vendor) {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => Home()));
+            } else if (doc['role'] == Roles.user) {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => Home()));
+            }
+          }
+        });
+      });
     } on FirebaseAuthException catch (err) {
       print(err);
     }
@@ -41,7 +80,7 @@ class _SignInScreenState extends State<SignInScreen> {
     });
     GoogleSignInAccount? googleUser = await googleSignIn.signIn();
     GoogleSignInAuthentication googleAuthentication =
-        await googleUser!.authentication;
+    await googleUser!.authentication;
     final AuthCredential credential = GoogleAuthProvider.credential(
         idToken: googleAuthentication.idToken,
         accessToken: googleAuthentication.accessToken);
