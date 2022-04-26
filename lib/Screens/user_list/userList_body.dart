@@ -1,13 +1,21 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:remove_h2o/Screens/sign_up/sign_up_screen.dart';
 import 'package:remove_h2o/Screens/user_list/users_list.dart';
 import 'package:remove_h2o/screen_buttons/reportEmergency_Screen.dart';
 import 'package:remove_h2o/size_config.dart';
 import 'package:remove_h2o/userlist_buttons/pendingAccess_body.dart';
 
-class userlistbody extends StatelessWidget {
+class userlistbody extends StatefulWidget {
   const userlistbody({Key? key}) : super(key: key);
 
+  @override
+  State<userlistbody> createState() => _userlistbodyState();
+}
+
+class _userlistbodyState extends State<userlistbody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,6 +92,14 @@ class userlistbody extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            Navigator.push(context, MaterialPageRoute(builder: (_)=>SignUpScreen()));
+          });
+        },
+        child: Icon(Icons.add),
       ),
     );
   }

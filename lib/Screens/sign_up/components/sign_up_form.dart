@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:remove_h2o/Screens/otp/otp_screen.dart';
 import 'package:remove_h2o/components/custom_surfix_icon.dart';
 import 'package:remove_h2o/components/embosed%20button.dart';
 import 'package:remove_h2o/components/form_error.dart';
@@ -14,10 +13,8 @@ class SignUpForm extends StatefulWidget {
   final void Function(
     String email,
     String fname,
-    
     String lname,
     String phoneNo,
-    
     String password,
   ) submitFn;
 
@@ -39,7 +36,6 @@ class _SignUpFormState extends State<SignUpForm> {
   TextEditingController pcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
 
-
   void trySubmit() {
     final isValid = _formKey.currentState!.validate();
 
@@ -52,11 +48,7 @@ class _SignUpFormState extends State<SignUpForm> {
         pcontroller.text.trim(),
         passwordcontroller.text.trim(),
       );
-      print(fcontroller);
-      print(lcontroller);
-      print(econtroller);
-      print(pcontroller);
-      print(passwordcontroller);
+      Navigator.of(context).pop();
     }
   }
 
@@ -112,7 +104,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
   TextFormField buildPasswordFormField() {
     return TextFormField(
-     controller: passwordcontroller,
+      controller: passwordcontroller,
       decoration: InputDecoration(
         labelText: "Password",
         hintText: "Enter Your Password",
@@ -131,13 +123,12 @@ class _SignUpFormState extends State<SignUpForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: CustomIcon(svgIcon: "assets/icons/Mail.svg"),
       ),
-     
     );
   }
 
   TextFormField buildfnameFormField() {
     return TextFormField(
-     controller: fcontroller,
+      controller: fcontroller,
       decoration: InputDecoration(
         labelText: "First Name",
         hintText: "Enter your First Name",
@@ -149,7 +140,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
   TextFormField buildphonenumberFormField() {
     return TextFormField(
-     controller: pcontroller,
+      controller: pcontroller,
       decoration: InputDecoration(
         labelText: "Phone#",
         hintText: "Enter your Phone#",

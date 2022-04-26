@@ -19,22 +19,23 @@ class _PendingAccess_bodyState extends State<PendingAccess_body> {
       .where('role', isEqualTo: 2)
       .snapshots();
 
-// Future updateUser(String name) {
-//     return users
-//         .where('firstName', isEqualTo: name )
-//         .get()
-//         .then((value) => value.docs.forEach((element) {
-//               element.reference.update({"approved": true});
-//             }));
-//   }
-
-    Future<void> updateUser() {
+  Future updateUser(String docId) {
     return users
-    .doc('d1x55ivmRvZnLokQRkPKaxH7MLh2')
-    .update({'approved': true})
-    .then((value) => print("User Updated"))
-    .catchError((error) => print("Failed to update user: $error"));
-}
+        .where('role', isEqualTo: 2)
+        .where('docId', isEqualTo: docId)
+        .get()
+        .then((value) => value.docs.forEach((element) {
+              element.reference.update({"approved": true});
+            }));
+  }
+
+  // Future<void> updateUser() {
+  //   return users
+  //       .doc('xJPQrKVXeKfT6DmtID9irdpE9It2')
+  //       .update({'approved': true})
+  //       .then((value) => print("User Updated"))
+  //       .catchError((error) => print("Failed to update user: $error"));
+  // }
 
   // void getuser() {
   //   FirebaseFirestore.instance
@@ -46,6 +47,20 @@ class _PendingAccess_bodyState extends State<PendingAccess_body> {
   //       print(doc["firstName"]);
   //     });
   //   });
+  // }
+
+  // updateNam() {
+  //   FirebaseFirestore.instance
+  //       .collection('Users')
+  //       .where('role', isEqualTo: 2)
+  //       .get()
+  //       .then(
+  //         (value) => value.docs.forEach(
+  //           (doc) {
+  //             print(doc['firstName']);
+  //           },
+  //         ),
+  //       );
   // }
 
   @override
@@ -194,11 +209,16 @@ class _PendingAccess_bodyState extends State<PendingAccess_body> {
                                   ),
                                   FlatButton(
                                     child: Text("Yes"),
-                                    onPressed:  updateUser,
+                                    onPressed: () {
+                                      setState(() {
+                                        updateUser(data['docId']);
+                                      });
+                                      Navigator.of(context).pop();
+                                    },
                                   ),
                                 ],
                               ),
-                            ),
+                            )
                           },
                         );
                       }).toList());

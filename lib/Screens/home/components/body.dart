@@ -26,19 +26,21 @@ class _BodyState extends State<Body> {
       padding: EdgeInsets.symmetric(vertical: 20),
       child: Column(
         children: [
-          SizedBox(height: 20),
-          Roles.superadmin == false && Roles.admin ==false
+          Roles.vendor==2
               ? HomeMenu(
                   text: "Report Emergency",
                   icon: FontAwesomeIcons.phone,
                   press: () => {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ReportEmergency()))
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ReportEmergency(),
+                      ),
+                    ),
                   },
                 )
-              : SizedBox(height: 20),
+              : Text(''),
+          SizedBox(height: 20),
           HomeMenu(
             text: "Send a Referral",
             icon: FontAwesomeIcons.users,
@@ -48,7 +50,7 @@ class _BodyState extends State<Body> {
             },
           ),
           SizedBox(height: 20),
-          Roles.superadmin == false && Roles.admin == false
+          Roles.vendor==2
               ? HomeMenu(
                   text: "Send a Picture",
                   icon: FontAwesomeIcons.camera,
@@ -57,9 +59,10 @@ class _BodyState extends State<Body> {
                         MaterialPageRoute(builder: (context) => PhotoData()));
                   },
                 )
-              : SizedBox(height: 20),
+              : Text(''),
+          SizedBox(height: 20),
           HomeMenu(
-            text: Roles.superadmin == false ? "User's List" : "Vendor's List",
+            text: "Vendor's List",
             icon: FontAwesomeIcons.list,
             press: () {
               Navigator.push(context,
