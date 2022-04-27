@@ -29,6 +29,16 @@ class _PendingAccess_bodyState extends State<PendingAccess_body> {
             }));
   }
 
+  // Future deleteUser(String docId) {
+  //   return users
+  //       .where('role', isEqualTo: 2)
+  //       .where('docId', isEqualTo: docId)
+  //       .get()
+  //       .then((value) => value.docs.forEach((element) {
+  //             element.reference.delete();
+  //           }));
+  // }
+
   // Future<void> updateUser() {
   //   return users
   //       .doc('xJPQrKVXeKfT6DmtID9irdpE9It2')
@@ -213,7 +223,8 @@ class _PendingAccess_bodyState extends State<PendingAccess_body> {
                                       setState(() {
                                         updateUser(data['docId']);
                                       });
-                                      Navigator.of(context).pop();
+                                                                      
+                                        Navigator.of(context).pop();
                                     },
                                   ),
                                 ],
