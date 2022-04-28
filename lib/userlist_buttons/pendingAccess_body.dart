@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:remove_h2o/size_config.dart';
 import 'package:remove_h2o/userlist_buttons/pending_access.dart';
@@ -31,7 +32,6 @@ class _PendingAccess_bodyState extends State<PendingAccess_body> {
 
   // Future deleteUser(String docId) {
   //   return users
-  //       .where('role', isEqualTo: 2)
   //       .where('docId', isEqualTo: docId)
   //       .get()
   //       .then((value) => value.docs.forEach((element) {
@@ -46,9 +46,8 @@ class _PendingAccess_bodyState extends State<PendingAccess_body> {
   //       .then((value) => print("User Updated"))
   //       .catchError((error) => print("Failed to update user: $error"));
   // }
-
-  // void getuser() {
-  //   FirebaseFirestore.instance
+//     Future<void> updateUser() {
+//     return users
   //       .collection('Users')
   //       .get()
   //       .then((QuerySnapshot querySnapshot) {
@@ -102,27 +101,33 @@ class _PendingAccess_bodyState extends State<PendingAccess_body> {
             //     child:
 
             ListView(
-          // crossAxisAlignment: CrossAxisAlignment.start,
+          //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: CircleAvatar(
-                  backgroundColor: Colors.black,
-                  radius: 16,
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Padding(
-                      padding: const EdgeInsets.only(left: 2.0, bottom: 1),
-                      child: Icon(Icons.arrow_back_ios, size: 18),
-                    ),
-                  )),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  CircleAvatar(
+                      backgroundColor: Colors.black,
+                      radius: 16,
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Padding(
+                          padding: const EdgeInsets.only(left: 2.0, bottom: 1),
+                          child: Icon(Icons.arrow_back_ios, size: 18),
+                        ),
+                      )),
+                ],
+              ),
             ),
             SizedBox(
-              height: 25.0,
+              height: 1.0,
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
 
             // FutureBuilder<DocumentSnapshot>(
             //   future: FirebaseFirestore.instance
@@ -223,8 +228,8 @@ class _PendingAccess_bodyState extends State<PendingAccess_body> {
                                       setState(() {
                                         updateUser(data['docId']);
                                       });
-                                                                      
-                                        Navigator.of(context).pop();
+
+                                      Navigator.of(context).pop();
                                     },
                                   ),
                                 ],

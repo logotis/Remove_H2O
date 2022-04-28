@@ -1,12 +1,83 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:remove_h2o/size_config.dart';
 
-class PhotoData extends StatelessWidget {
+class PhotoData extends StatefulWidget {
   const PhotoData({Key? key}) : super(key: key);
+
+  @override
+  State<PhotoData> createState() => _PhotoDataState();
+}
+
+class _PhotoDataState extends State<PhotoData> {
+  File? _image;
+  File? _image1;
+  File? _image2;
+  File? _image3;
+
+  Future getImage() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.camera);
+    if (image != null) {
+      final imageTem = File(image.path);
+      setState(() {
+        _image = imageTem;
+      });
+    }
+  }
+
+  Future getImage1() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.camera);
+    if (image != null) {
+      final imageTem = File(image.path);
+      setState(() {
+        _image1 = imageTem;
+      });
+    }
+  }
+
+  Future getImage2() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.camera);
+    if (image != null) {
+      final imageTem = File(image.path);
+      setState(() {
+        _image2 = imageTem;
+      });
+    }
+  }
+
+  Future getImage3() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.camera);
+    if (image != null) {
+      final imageTem = File(image.path);
+      setState(() {
+        _image3 = imageTem;
+      });
+    }
+  }
+
+  Future<void> submitData() async {
+    FirebaseFirestore.instance.collection('Leads').add({
+      'name':namecontroller,
+      'address':adresscontroller,
+      'cellNo': cellcontroller,
+      'work':workcontroller,
+      'mailadress':mailadresscontroller,
+      'workadress':workadresscontroller,
+    });
+  }
+
+  TextEditingController namecontroller = TextEditingController();
+  TextEditingController adresscontroller = TextEditingController();
+  TextEditingController cellcontroller = TextEditingController();
+  TextEditingController workcontroller = TextEditingController();
+  TextEditingController mailadresscontroller = TextEditingController();
+  TextEditingController workadresscontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +120,7 @@ class PhotoData extends StatelessWidget {
                   )),
               SizedBox(height: 16),
               TextFormField(
+                controller: namecontroller,
                 decoration: InputDecoration(
                   hintText: "Enter C_name",
                   floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -58,6 +130,7 @@ class PhotoData extends StatelessWidget {
                 height: 8,
               ),
               TextFormField(
+                controller: adresscontroller,
                 decoration: InputDecoration(
                   hintText: "Enter Address",
                   floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -67,6 +140,7 @@ class PhotoData extends StatelessWidget {
                 height: 8,
               ),
               TextFormField(
+                controller: cellcontroller,
                 decoration: InputDecoration(
                   hintText: "Enter Cell#",
                   floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -75,16 +149,17 @@ class PhotoData extends StatelessWidget {
               SizedBox(
                 height: 8,
               ),
+              // TextFormField(
+              //   decoration: InputDecoration(
+              //     hintText: "Enter Your New Address",
+              //     floatingLabelBehavior: FloatingLabelBehavior.always,
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 8,
+              // ),
               TextFormField(
-                decoration: InputDecoration(
-                  hintText: "Enter Your New Address",
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                ),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              TextFormField(
+                controller: workcontroller,
                 decoration: InputDecoration(
                   hintText: "Enter Work",
                   floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -94,6 +169,7 @@ class PhotoData extends StatelessWidget {
                 height: 8,
               ),
               TextFormField(
+                controller: mailadresscontroller,
                 decoration: InputDecoration(
                   hintText: "Enter Email Addess",
                   floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -103,9 +179,10 @@ class PhotoData extends StatelessWidget {
                 height: 8,
               ),
               TextFormField(
+                controller: workadresscontroller,
                 maxLines: 4,
                 decoration: InputDecoration(
-                  hintText: "Enter Addess",
+                  hintText: "Enter Work Addess",
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                 ),
               ),
@@ -124,40 +201,54 @@ class PhotoData extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(
-                    height: 90.0, width: 90.0,
-                    // margin: EdgeInsets.only(right: 220),
-                    padding: EdgeInsets.all(2),
-                    // alignment: Alignment.center,
-                    decoration: new BoxDecoration(color: Colors.blueAccent),
-                    child: Center(
-                      child: IconButton(
-                        icon: FaIcon(
-                          FontAwesomeIcons.camera,
-                          color: Color.fromARGB(255, 8, 8, 8),
+                  _image == null
+                      ? Container(
+                          height: 90.0, width: 90.0,
+                          // margin: EdgeInsets.only(right: 220),
+                          padding: EdgeInsets.all(2),
+                          // alignment: Alignment.center,
+                          decoration:
+                              new BoxDecoration(color: Colors.blueAccent),
+                          child: Center(
+                            child: IconButton(
+                              icon: FaIcon(
+                                FontAwesomeIcons.camera,
+                                color: Color.fromARGB(255, 8, 8, 8),
+                              ),
+                              iconSize: 70,
+                              onPressed: getImage,
+                            ),
+                          ),
+                        )
+                      : Container(
+                          height: 90.0,
+                          width: 90.0,
+                          child: Image.file(_image!),
                         ),
-                        iconSize: 70,
-                        onPressed: null,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 90.0, width: 90.0,
-                    // margin: EdgeInsets.only(right: 220),
-                    padding: EdgeInsets.all(2),
-                    // alignment: Alignment.center,
-                    decoration: new BoxDecoration(color: Colors.blueAccent),
-                    child: Center(
-                      child: IconButton(
-                        icon: FaIcon(
-                          FontAwesomeIcons.camera,
-                          color: Color.fromARGB(255, 8, 8, 8),
+                  _image1 == null
+                      ? Container(
+                          height: 90.0, width: 90.0,
+                          // margin: EdgeInsets.only(right: 220),
+                          padding: EdgeInsets.all(2),
+                          // alignment: Alignment.center,
+                          decoration:
+                              new BoxDecoration(color: Colors.blueAccent),
+                          child: Center(
+                            child: IconButton(
+                              icon: FaIcon(
+                                FontAwesomeIcons.camera,
+                                color: Color.fromARGB(255, 8, 8, 8),
+                              ),
+                              iconSize: 70,
+                              onPressed: getImage1,
+                            ),
+                          ),
+                        )
+                      : Container(
+                          height: 90.0,
+                          width: 90.0,
+                          child: Image.file(_image1!),
                         ),
-                        iconSize: 70,
-                        onPressed: null,
-                      ),
-                    ),
-                  ),
                 ],
               ),
               SizedBox(
@@ -166,40 +257,54 @@ class PhotoData extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(
-                    height: 90.0, width: 90.0,
-                    // margin: EdgeInsets.only(right: 220),
-                    padding: EdgeInsets.all(2),
-                    // alignment: Alignment.center,
-                    decoration: new BoxDecoration(color: Colors.blueAccent),
-                    child: Center(
-                      child: IconButton(
-                        icon: FaIcon(
-                          FontAwesomeIcons.camera,
-                          color: Color.fromARGB(255, 8, 8, 8),
+                  _image2 == null
+                      ? Container(
+                          height: 90.0, width: 90.0,
+                          // margin: EdgeInsets.only(right: 220),
+                          padding: EdgeInsets.all(2),
+                          // alignment: Alignment.center,
+                          decoration:
+                              new BoxDecoration(color: Colors.blueAccent),
+                          child: Center(
+                            child: IconButton(
+                              icon: FaIcon(
+                                FontAwesomeIcons.camera,
+                                color: Color.fromARGB(255, 8, 8, 8),
+                              ),
+                              iconSize: 70,
+                              onPressed: getImage2,
+                            ),
+                          ),
+                        )
+                      : Container(
+                          height: 90.0,
+                          width: 90.0,
+                          child: Image.file(_image2!),
                         ),
-                        iconSize: 70,
-                        onPressed: null,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 90.0, width: 90.0,
-                    // margin: EdgeInsets.only(right: 220),
-                    padding: EdgeInsets.all(2),
-                    // alignment: Alignment.center,
-                    decoration: new BoxDecoration(color: Colors.blueAccent),
-                    child: Center(
-                      child: IconButton(
-                        icon: FaIcon(
-                          FontAwesomeIcons.camera,
-                          color: Color.fromARGB(255, 8, 8, 8),
+                  _image3 == null
+                      ? Container(
+                          height: 90.0, width: 90.0,
+                          // margin: EdgeInsets.only(right: 220),
+                          padding: EdgeInsets.all(2),
+                          // alignment: Alignment.center,
+                          decoration:
+                              new BoxDecoration(color: Colors.blueAccent),
+                          child: Center(
+                            child: IconButton(
+                              icon: FaIcon(
+                                FontAwesomeIcons.camera,
+                                color: Color.fromARGB(255, 8, 8, 8),
+                              ),
+                              iconSize: 70,
+                              onPressed: getImage3,
+                            ),
+                          ),
+                        )
+                      : Container(
+                          height: 90.0,
+                          width: 90.0,
+                          child: Image.file(_image3!),
                         ),
-                        iconSize: 70,
-                        onPressed: null,
-                      ),
-                    ),
-                  ),
                 ],
               ),
               SizedBox(
@@ -216,7 +321,7 @@ class PhotoData extends StatelessWidget {
                         borderRadius: BorderRadius.circular(32.0)),
                     minimumSize: Size(100, 40), //////// HERE
                   ),
-                  onPressed: () {},
+                  onPressed: submitData,
                   child: Text('Continue'),
                 ),
               )

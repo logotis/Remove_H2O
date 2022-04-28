@@ -3,7 +3,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:remove_h2o/Screens/aboutus_screen.dart';
 import 'package:remove_h2o/Screens/home/Home_screen.dart';
@@ -11,10 +10,9 @@ import 'package:remove_h2o/Screens/sign_in/components/sign_form.dart';
 import 'package:remove_h2o/components/no_account_text.dart';
 import 'package:remove_h2o/components/socal_card.dart';
 import 'package:remove_h2o/enum.dart';
-import 'package:remove_h2o/helper/keyboard.dart';
+import 'package:remove_h2o/screen_buttons/reportEmergency_Screen.dart';
+import 'package:remove_h2o/screen_buttons/send_referral.dart';
 import 'package:remove_h2o/size_config.dart';
-
-import 'components/body.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -49,7 +47,6 @@ class _SignInScreenState extends State<SignInScreen> {
           print(doc["role"]);
 
           if (doc["approved"] != true) {
-            
             Text('User is pending verification');
             
           } else {
@@ -80,7 +77,7 @@ class _SignInScreenState extends State<SignInScreen> {
     });
     GoogleSignInAccount? googleUser = await googleSignIn.signIn();
     GoogleSignInAuthentication googleAuthentication =
-    await googleUser!.authentication;
+        await googleUser!.authentication;
     final AuthCredential credential = GoogleAuthProvider.credential(
         idToken: googleAuthentication.idToken,
         accessToken: googleAuthentication.accessToken);
@@ -199,10 +196,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         icon: "assets/icons/facebook-2.svg",
                         press: () {},
                       ),
-                      SocalCard(
-                        icon: "assets/icons/twitter.svg",
-                        press: () {},
-                      ),
+                      // SocalCard(
+                      //   icon: "assets/icons/twitter.svg",
+                      //   press: () {},
+                      // ),
                     ],
                   ),
                   SizedBox(height: getProportionateScreenHeight(20)),

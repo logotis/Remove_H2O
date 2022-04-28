@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:remove_h2o/Screens/sign_up/sign_up_screen.dart';
 import 'package:remove_h2o/Screens/user_list/users_list.dart';
-import 'package:remove_h2o/screen_buttons/reportEmergency_Screen.dart';
 import 'package:remove_h2o/size_config.dart';
+import 'package:remove_h2o/userlist_buttons/approved_usersBody.dart';
 import 'package:remove_h2o/userlist_buttons/pendingAccess_body.dart';
+import 'package:remove_h2o/userlist_buttons/revoke_usersbody.dart';
 
 class userlistbody extends StatefulWidget {
   const userlistbody({Key? key}) : super(key: key);
@@ -78,7 +79,7 @@ class _userlistbodyState extends State<userlistbody> {
               icon: FontAwesomeIcons.users,
               press: () => {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ReportEmergency()))
+                    MaterialPageRoute(builder: (context) => Apprrovedbody()))
               },
             ),
             SizedBox(height: 20),
@@ -87,7 +88,7 @@ class _userlistbodyState extends State<userlistbody> {
               icon: FontAwesomeIcons.refresh,
               press: () => {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ReportEmergency()))
+                    MaterialPageRoute(builder: (context) => RevokeuserBody()))
               },
             ),
           ],

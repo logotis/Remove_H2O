@@ -130,8 +130,8 @@ class _SignUpFormState extends State<SignUpForm> {
     return TextFormField(
       controller: fcontroller,
       decoration: InputDecoration(
-        labelText: "First Name",
-        hintText: "Enter your First Name",
+        labelText: "Name",
+        hintText: "Enter your Name",
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: CustomIcon(svgIcon: "assets/icons/User Icon.svg"),
       ),
@@ -154,8 +154,8 @@ class _SignUpFormState extends State<SignUpForm> {
     return TextFormField(
       controller: lcontroller,
       decoration: InputDecoration(
-        labelText: "Last Name",
-        hintText: "Enter your Last Name",
+        labelText: "Adress",
+        hintText: "Enter your Adress",
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: CustomIcon(svgIcon: "assets/icons/User Icon.svg"),
       ),

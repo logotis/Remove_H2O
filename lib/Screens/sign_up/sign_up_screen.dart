@@ -38,7 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         'deleted':false,
         'firstName':fname,
         'isEmailVerified':false,
-        'lastName':lname,  
+        'Adress':lname,  
         'phoneNo':phoneNo,
         'password':password,
       });

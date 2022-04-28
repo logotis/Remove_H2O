@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:remove_h2o/Screens/aboutus_screen.dart';
-import 'package:remove_h2o/Screens/share_app.dart';
-import 'package:remove_h2o/contactus/contactus_body.dart';
 import 'package:remove_h2o/Screens/home/components/body.dart';
-import 'package:remove_h2o/myInfo_screen/myInfo_Body.dart';
+import 'package:remove_h2o/Screens/share_app.dart';
 import 'package:remove_h2o/components/my_drawer_header.dart';
+import 'package:remove_h2o/contactus/contactus_body.dart';
+import 'package:remove_h2o/myInfo_screen/myInfo_Body.dart';
 import 'package:remove_h2o/size_config.dart';
 
 class Home extends StatefulWidget {
@@ -21,11 +21,9 @@ class HomeState extends State<Home> {
 
     if (currentPage == DrawerSections.home) {
       container = Body();
-    }
-    else if (currentPage == DrawerSections.contacts) {
+    } else if (currentPage == DrawerSections.contacts) {
       container = ContactusBody();
-    }
-    else if (currentPage == DrawerSections.aboutus) {
+    } else if (currentPage == DrawerSections.aboutus) {
       container = abtpage();
     }
     // else if (currentPage == DrawerSections.socialmedia) {
@@ -33,8 +31,7 @@ class HomeState extends State<Home> {
     // }
     else if (currentPage == DrawerSections.shareapp) {
       container = ShareApp();
-    }
-    else if (currentPage == DrawerSections.myinfo) {
+    } else if (currentPage == DrawerSections.myinfo) {
       container = Infoscreenbody();
     }
     return Scaffold(
@@ -71,25 +68,35 @@ class HomeState extends State<Home> {
         top: 0,
       ),
       child: Column(children: [
-        Divider(thickness: 3,),
+        Divider(
+          thickness: 3,
+        ),
         menuItem(1, "Home", Icons.dashboard_outlined,
             currentPage == DrawerSections.home ? true : false),
         Divider(thickness: 3),
         menuItem(2, "Contact Us", Icons.people_alt_outlined,
             currentPage == DrawerSections.contacts ? true : false),
-        Divider(thickness: 3,),
+        Divider(
+          thickness: 3,
+        ),
         menuItem(3, "About Us", Icons.event,
             currentPage == DrawerSections.aboutus ? true : false),
         // Divider(thickness: 3,),
         // menuItem(4, "Social Media", Icons.notes,
         //     currentPage == DrawerSections.socialmedia ? true : false),
-        Divider(thickness: 3,),
+        Divider(
+          thickness: 3,
+        ),
         menuItem(5, "Share App", Icons.share,
-            currentPage == DrawerSections.shareapp? true : false),
-        Divider(thickness: 3,),
+            currentPage == DrawerSections.shareapp ? true : false),
+        Divider(
+          thickness: 3,
+        ),
         menuItem(6, "My info", Icons.person_outlined,
             currentPage == DrawerSections.myinfo ? true : false),
-        Divider(thickness: 3,),
+        Divider(
+          thickness: 3,
+        ),
       ]),
     );
   }
@@ -142,6 +149,7 @@ class HomeState extends State<Home> {
 
 enum DrawerSections {
   home,
+  reprotEmg,
   contacts,
   aboutus,
   socialmedia,
