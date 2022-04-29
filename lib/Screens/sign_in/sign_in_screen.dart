@@ -13,6 +13,7 @@ import 'package:remove_h2o/enum.dart';
 import 'package:remove_h2o/screen_buttons/reportEmergency_Screen.dart';
 import 'package:remove_h2o/screen_buttons/send_referral.dart';
 import 'package:remove_h2o/size_config.dart';
+import 'package:remove_h2o/sphome/sphome.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -52,10 +53,10 @@ class _SignInScreenState extends State<SignInScreen> {
           } else {
             if (doc['role'] == Roles.superadmin) {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => Home()));
+                  context, MaterialPageRoute(builder: (_) => SPHome()));
             } else if (doc['role'] == Roles.admin) {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => Home()));
+                  context, MaterialPageRoute(builder: (_) => SPHome()));
             } else if (doc['role'] == Roles.vendor) {
               Navigator.push(context,
                   MaterialPageRoute(builder: (_) => Home()));
@@ -70,6 +71,55 @@ class _SignInScreenState extends State<SignInScreen> {
       print(err);
     }
   }
+
+ void _signInauthuserform(
+    String email,
+    String password,
+  ) async {
+    UserCredential userCredential;
+    try {
+      userCredential = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      print(userCredential);
+      //  final user=   FirebaseFirestore.instance
+      //         .collection('User')
+      //         .where('email', isEqualTo: userCredential.user!.email)
+      //         .get();
+
+      FirebaseFirestore.instance
+          .collection('Users')
+          .where('email', isEqualTo: userCredential.user!.email)
+          .get()
+          .then((QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          print(doc["role"]);
+
+          if (doc["approved"] != true) {
+            Text('User is pending verification');
+            
+          } else {
+            if (doc['role'] == Roles.superadmin) {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => SPHome()));
+            } else if (doc['role'] == Roles.admin) {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => SPHome()));
+            } else if (doc['role'] == Roles.vendor) {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => Home()));
+            } else if (doc['role'] == Roles.user) {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => Home()));
+            }
+          }
+        });
+      });
+    } on FirebaseAuthException catch (err) {
+      print(err);
+    }
+  }
+
+
 
   Future<void> controlSign() async {
     this.setState(() {
@@ -177,7 +227,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: SizeConfig.screenHeight * 0.08),
-                  SignForm(_signInauthform),
+                  SignForm(_signInauthform,),
                   SizedBox(height: SizeConfig.screenHeight * 0.08),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

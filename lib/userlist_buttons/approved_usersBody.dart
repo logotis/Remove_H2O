@@ -1,10 +1,27 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:remove_h2o/size_config.dart';
 import 'package:remove_h2o/userlist_buttons/approved_usersAccess.dart';
 
-class Apprrovedbody extends StatelessWidget {
+class Apprrovedbody extends StatefulWidget {
   const Apprrovedbody({Key? key}) : super(key: key);
 
+  @override
+  State<Apprrovedbody> createState() => _ApprrovedbodyState();
+}
+
+class _ApprrovedbodyState extends State<Apprrovedbody> {
+   final auth = FirebaseAuth.instance;
+  CollectionReference users = FirebaseFirestore.instance.collection('Users');
+  final Stream<QuerySnapshot> usersStream = FirebaseFirestore.instance
+      .collection('Users')
+      .where('role', isEqualTo: 2)
+      .where('approved', isEqualTo: true)
+      .where('suapproved', isEqualTo: true)
+      .snapshots();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,34 +78,92 @@ class Apprrovedbody extends StatelessWidget {
               height: 1.0,
             ),
             SizedBox(height: 10),
-            ApprovedUsers(
+
+           StreamBuilder<QuerySnapshot>(
+                stream: usersStream,
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Something went wrong');
+                  }
+
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Text("Loading");
+                  }
+
+                  return ListView(
+                      shrinkWrap: true,
+                      // itemCount: snapshot.data!.docs.length,
+                      // itemBuilder: ((context, index) {
+                      children:
+                          snapshot.data!.docs.map((DocumentSnapshot document) {
+                        Map<String, dynamic> data =
+                            document.data()! as Map<String, dynamic>;
+                        print(Text(data['firstName']));
+                        return ApprovedUsers(
               // email: '',
               // fname: "",
               // lname: '',
               // phoneNo: '',
-              text: "Parrot Sab",
-              press: () => {
-                showDialog(
-                  context: context,
-                  builder: (_) => AlertDialog(
-                    elevation: 24.0,
-                    backgroundColor: Colors.white,
-                    title: Text("NAME : Parrot Sab"),
-                    content: Text("Do you want to give access"),
-                    actions: <Widget>[
-                      FlatButton(
-                        child: Text("No"),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                      FlatButton(
-                        child: Text("Yes"),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                    ],
-                  ),
-                ),
-              },
-            ),
+              text: data['firstName'],
+              // press: () => {
+              //   showDialog(
+              //     context: context,
+              //     builder: (_) => AlertDialog(
+              //       elevation: 24.0,
+              //       backgroundColor: Colors.white,
+              //       title: Text(data['firstName'].toString()),
+              //       content: Text("Do you want to give access"),
+              //       actions: <Widget>[
+              //         FlatButton(
+              //           child: Text("No"),
+              //           onPressed: () => Navigator.pop(context),
+              //         ),
+              //         FlatButton(
+              //           child: Text("Yes"),
+              //           onPressed: () => Navigator.pop(context),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // },
+            );
+                      }).toList());
+                  //     return Text('nodata');
+                  //   }),
+                  // );
+                }),
+
+
+
+            // ApprovedUsers(
+            //   // email: '',
+            //   // fname: "",
+            //   // lname: '',
+            //   // phoneNo: '',
+            //   text: "Parrot Sab",
+            //   press: () => {
+            //     showDialog(
+            //       context: context,
+            //       builder: (_) => AlertDialog(
+            //         elevation: 24.0,
+            //         backgroundColor: Colors.white,
+            //         title: Text("NAME : Parrot Sab"),
+            //         content: Text("Do you want to give access"),
+            //         actions: <Widget>[
+            //           FlatButton(
+            //             child: Text("No"),
+            //             onPressed: () => Navigator.pop(context),
+            //           ),
+            //           FlatButton(
+            //             child: Text("Yes"),
+            //             onPressed: () => Navigator.pop(context),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   },
+            // ),
           ],
         )
 
