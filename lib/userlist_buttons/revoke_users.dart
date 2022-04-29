@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Revokeuser extends StatelessWidget {
-  const Revokeuser({Key? key, required this.text, required this.press})
+  const Revokeuser({Key? key, required this.text,})
       : super(key: key);
   final String text;
-  final VoidCallback? press;
+  // final VoidCallback? press;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,7 +18,7 @@ class Revokeuser extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           backgroundColor: Colors.grey[200],
         ),
-        onPressed: press,
+        onPressed: (){},
         child: Row(
           children: [
             // IconButton(

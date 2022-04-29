@@ -18,6 +18,9 @@ class _PendingAccess_bodyState extends State<PendingAccess_body> {
   final Stream<QuerySnapshot> usersStream = FirebaseFirestore.instance
       .collection('Users')
       .where('role', isEqualTo: 2)
+      .where('deleted', isEqualTo: false)
+      .where('approved', isEqualTo: false)
+      .where('suapproved', isEqualTo: false)
       .snapshots();
 
   Future updateUser(String docId) {
@@ -26,7 +29,18 @@ class _PendingAccess_bodyState extends State<PendingAccess_body> {
         .where('docId', isEqualTo: docId)
         .get()
         .then((value) => value.docs.forEach((element) {
-              element.reference.update({"approved": true});
+              element.reference.update({
+                "approved": true, 'suapproved': true});
+            }));
+  }
+
+  Future deleteuser(String docId) {
+    return users
+        .where('role', isEqualTo: 2)
+        .where('docId', isEqualTo: docId)
+        .get()
+        .then((value) => value.docs.forEach((element) {
+              element.reference.update({'deleted': true});
             }));
   }
 
@@ -219,9 +233,13 @@ class _PendingAccess_bodyState extends State<PendingAccess_body> {
                                 content: Text("Do you want to give access"),
                                 actions: <Widget>[
                                   FlatButton(
-                                    child: Text("No"),
-                                    onPressed: () => Navigator.pop(context),
-                                  ),
+                                      child: Text("No"),
+                                      onPressed: () {
+                                        setState(() {
+                                          deleteuser(data['docId']);
+                                        });
+                                        Navigator.of(context).pop();
+                                      }),
                                   FlatButton(
                                     child: Text("Yes"),
                                     onPressed: () {

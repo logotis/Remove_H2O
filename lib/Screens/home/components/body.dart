@@ -10,6 +10,7 @@ import 'package:remove_h2o/leadgeneration_body.dart';
 import 'package:remove_h2o/screen_buttons/reportEmergency_Screen.dart';
 import 'package:remove_h2o/screen_buttons/send_referral.dart';
 import 'package:remove_h2o/screen_buttons/take_photo.dart';
+import 'package:remove_h2o/vendor%20user/vendoruserlistbody.dart';
 
 import 'home_menu.dart';
 
@@ -28,8 +29,7 @@ class _BodyState extends State<Body> {
       padding: EdgeInsets.symmetric(vertical: 20),
       child: Column(
         children: [
-          Roles.vendor == 2
-              ? HomeMenu(
+           HomeMenu(
                   text: "Report Emergency",
                   icon: FontAwesomeIcons.phone,
                   press: () => {
@@ -40,8 +40,8 @@ class _BodyState extends State<Body> {
                       ),
                     ),
                   },
-                )
-              : Text(''),
+                ),
+          
           SizedBox(height: 20),
           HomeMenu(
             text: "Send a Referral",
@@ -52,23 +52,33 @@ class _BodyState extends State<Body> {
             },
           ),
           SizedBox(height: 20),
-          Roles.vendor == 2
-              ? HomeMenu(
-                  text: "Send a Picture",
-                  icon: FontAwesomeIcons.camera,
-                  press: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => PhotoData()));
-                  },
-                )
-              : Text(''),
-          SizedBox(height: 20),
+          // HomeMenu(
+          //         text: "Send a Picture",
+          //         icon: FontAwesomeIcons.camera,
+          //         press: () {
+          //           Navigator.push(context,
+          //               MaterialPageRoute(builder: (context) => PhotoData()));
+          //         },
+          //       ),
+          
+          // SizedBox(height: 20),
           HomeMenu(
-            text: "Vendor's List",
+            text: "User's List",
             icon: FontAwesomeIcons.list,
             press: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => userlistbody()));
+                  MaterialPageRoute(builder: (context) => Vendoruserlistbody()));
+            },
+          ),
+          SizedBox(height: 20),
+           HomeMenu(
+            text: "Lead Generation list",
+            icon: FontAwesomeIcons.rectangleAd,
+            press: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Leadgenerationbody()));
             },
           ),
           SizedBox(height: 20),
@@ -80,17 +90,17 @@ class _BodyState extends State<Body> {
                   MaterialPageRoute(builder: (context) => Financescreen()));
             },
           ),
-          SizedBox(height: 20),
-          HomeMenu(
-            text: "Lead Generation list",
-            icon: FontAwesomeIcons.rectangleAd,
-            press: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => Leadgenerationbody()));
-            },
-          ),
+          // SizedBox(height: 20),
+          // HomeMenu(
+          //   text: "Lead Generation list",
+          //   icon: FontAwesomeIcons.rectangleAd,
+          //   press: () {
+          //     Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (context) => Leadgenerationbody()));
+          //   },
+          // ),
         ],
       ),
     );

@@ -35,6 +35,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         'email':email,
         'role': Roles.vendor,
         'approved':false,
+        'suapproved':false,
         'deleted':false,
         'firstName':fname,
         'isEmailVerified':false,
