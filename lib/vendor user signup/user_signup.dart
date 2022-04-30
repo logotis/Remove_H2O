@@ -6,15 +6,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:remove_h2o/Screens/sign_up/components/sign_up_form.dart';
 import 'package:remove_h2o/constants.dart';
 import 'package:remove_h2o/enum.dart';
+import 'package:remove_h2o/vendor%20user%20signup/components/user_signupform.dart';
 import '../../size_config.dart';
 
-class SignUpScreen extends StatefulWidget {
+class UserSignUpScreen extends StatefulWidget {
   // final test=Roles();
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<UserSignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpScreenState extends State<UserSignUpScreen> {
   final auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
 
@@ -29,21 +30,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
     try {
       userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      DocumentReference ref = firestore.collection('Users').doc(auth.currentUser!.uid);
+      DocumentReference ref =
+          firestore.collection('Users').doc(auth.currentUser!.uid);
+
       await ref.set({
         'docId': ref.id,
-        'email':email,
-        'role': Roles.vendor,
-        'approved':false,
-        'suapproved':false,
-        'deleted':false,
-        'firstName':fname,
-        'isEmailVerified':false,
-        'Adress':lname,  
-        'phoneNo':phoneNo,
-        'password':password,
+        'email': email,
+        'role': Roles.user,
+        'approved': true,
+        'deleted': false,
+        'firstName': fname,
+        'isEmailVerified': false,
+        'Adress': lname,
+        'phoneNo': phoneNo,
+        'password': password,
       });
-
     } on FirebaseAuthException catch (err) {
       print(err);
     }
@@ -70,17 +71,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CircleAvatar(
-                      backgroundColor: Colors.black,
-                      radius: 16,
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Padding(
-                          padding: const EdgeInsets.only(left: 2.0, bottom: 1),
-                          child: Icon(Icons.arrow_back_ios, size: 18),
-                        ),
-                      ),),
+                    backgroundColor: Colors.black,
+                    radius: 16,
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Padding(
+                        padding: const EdgeInsets.only(left: 2.0, bottom: 1),
+                        child: Icon(Icons.arrow_back_ios, size: 18),
+                      ),
+                    ),
+                  ),
                   Column(
                     children: [
                       // SizedBox(height: SizeConfig.screenHeight * 0.04), // 4%
@@ -99,7 +101,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(height: 5),
-                      SignUpForm(_submitauthform),
+                      UserSignUpForm(_submitauthform),
                       SizedBox(height: 15),
 
                       Text(

@@ -6,37 +6,37 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:remove_h2o/size_config.dart';
 import 'package:remove_h2o/userlist_buttons/pending_access.dart';
-
-class PendingAccess_body extends StatefulWidget {
+import 'package:remove_h2o/vendor%20user/userpending.dart';
+  final auth = FirebaseAuth.instance;
+class VendorpendingAccess_body extends StatefulWidget {
   @override
-  State<PendingAccess_body> createState() => _PendingAccess_bodyState();
+  State<VendorpendingAccess_body> createState() => _PendingAccess_bodyState();
 }
 
-class _PendingAccess_bodyState extends State<PendingAccess_body> {
-  final auth = FirebaseAuth.instance;
-  CollectionReference users = FirebaseFirestore.instance.collection('Users');
+class _PendingAccess_bodyState extends State<VendorpendingAccess_body> {
+
+ CollectionReference users = FirebaseFirestore.instance.collection('Users')
+  
+  ;
   final Stream<QuerySnapshot> usersStream = FirebaseFirestore.instance
-      .collection('Users')
-      .where('role', isEqualTo: 2)
-      .where('deleted', isEqualTo: false)
-      .where('approved', isEqualTo: false)
-      .where('suapproved', isEqualTo: false)
+      .collection('User')
+      .where('role', isEqualTo: 3)
+      .where('approved', isEqualTo: true)
       .snapshots();
 
   Future updateUser(String docId) {
     return users
-        .where('role', isEqualTo: 2)
+        .where('role', isEqualTo: 3)
         .where('docId', isEqualTo: docId)
         .get()
         .then((value) => value.docs.forEach((element) {
-              element.reference.update({
-                "approved": true, 'suapproved': true});
+              element.reference.update({"approved": true});
             }));
   }
 
   Future deleteuser(String docId) {
     return users
-        .where('role', isEqualTo: 2)
+        .where('role', isEqualTo: 3)
         .where('docId', isEqualTo: docId)
         .get()
         .then((value) => value.docs.forEach((element) {
@@ -217,7 +217,7 @@ class _PendingAccess_bodyState extends State<PendingAccess_body> {
                         Map<String, dynamic> data =
                             document.data()! as Map<String, dynamic>;
                         print(Text(data['firstName']));
-                        return PendingAccess(
+                        return VendorPendingAccess(
                           // email: '',
                           // fname: "",
                           // lname: '',

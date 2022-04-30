@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Revokeuser extends StatelessWidget {
-  const Revokeuser({Key? key, required this.text,})
+class VendorapprovedUsers extends StatelessWidget {
+  const VendorapprovedUsers({Key? key, required this.text})
       : super(key: key);
   final String text;
   // final VoidCallback? press;

@@ -4,23 +4,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:remove_h2o/size_config.dart';
-import 'package:remove_h2o/userlist_buttons/approved_usersAccess.dart';
-
-class Apprrovedbody extends StatefulWidget {
-  const Apprrovedbody({Key? key}) : super(key: key);
+import 'package:remove_h2o/userlist_buttons/revoke_users.dart';
+import 'package:remove_h2o/vendor%20user/userRevoke.dart';
+final auth = FirebaseAuth.instance;
+class VendorrevokeuserBody extends StatefulWidget {
+  const VendorrevokeuserBody({Key? key}) : super(key: key);
 
   @override
-  State<Apprrovedbody> createState() => _ApprrovedbodyState();
+  State<VendorrevokeuserBody> createState() => _RevokeuserBodyState();
 }
 
-class _ApprrovedbodyState extends State<Apprrovedbody> {
-   final auth = FirebaseAuth.instance;
-  CollectionReference users = FirebaseFirestore.instance.collection('Users');
+class _RevokeuserBodyState extends State<VendorrevokeuserBody> {
+   CollectionReference users = FirebaseFirestore.instance.collection('Users')
+  .doc(auth.currentUser!.uid).collection('Vendoruser')
+  ;
   final Stream<QuerySnapshot> usersStream = FirebaseFirestore.instance
       .collection('Users')
-      .where('role', isEqualTo: 2)
+      .where('role', isEqualTo: 3)
       .where('approved', isEqualTo: true)
-      .where('suapproved', isEqualTo: true)
       .snapshots();
   @override
   Widget build(BuildContext context) {
@@ -78,8 +79,7 @@ class _ApprrovedbodyState extends State<Apprrovedbody> {
               height: 1.0,
             ),
             SizedBox(height: 10),
-
-           StreamBuilder<QuerySnapshot>(
+            StreamBuilder<QuerySnapshot>(
                 stream: usersStream,
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -100,43 +100,40 @@ class _ApprrovedbodyState extends State<Apprrovedbody> {
                         Map<String, dynamic> data =
                             document.data()! as Map<String, dynamic>;
                         print(Text(data['firstName']));
-                        return ApprovedUsers(
-              // email: '',
-              // fname: "",
-              // lname: '',
-              // phoneNo: '',
-              text: data['firstName'],
-              // press: () => {
-              //   showDialog(
-              //     context: context,
-              //     builder: (_) => AlertDialog(
-              //       elevation: 24.0,
-              //       backgroundColor: Colors.white,
-              //       title: Text(data['firstName'].toString()),
-              //       content: Text("Do you want to give access"),
-              //       actions: <Widget>[
-              //         FlatButton(
-              //           child: Text("No"),
-              //           onPressed: () => Navigator.pop(context),
-              //         ),
-              //         FlatButton(
-              //           child: Text("Yes"),
-              //           onPressed: () => Navigator.pop(context),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // },
-            );
+                        return VendorRevokeuser(
+                          // email: '',
+                          // fname: "",
+                          // lname: '',
+                          // phoneNo: '',
+                          text: data['firstName'].toString(),
+                          // press: () => {
+                          //   showDialog(
+                          //     context: context,
+                          //     builder: (_) => AlertDialog(
+                          //       elevation: 24.0,
+                          //       backgroundColor: Colors.white,
+                          //       title: Text("NAME : Parrot Sab"),
+                          //       content: Text("Do you want to give access"),
+                          //       actions: <Widget>[
+                          //         FlatButton(
+                          //           child: Text("No"),
+                          //           onPressed: () => Navigator.pop(context),
+                          //         ),
+                          //         FlatButton(
+                          //           child: Text("Yes"),
+                          //           onPressed: () => Navigator.pop(context),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // },
+                        );
                       }).toList());
                   //     return Text('nodata');
                   //   }),
                   // );
                 }),
-
-
-
-            // ApprovedUsers(
+            // Revokeuser(
             //   // email: '',
             //   // fname: "",
             //   // lname: '',

@@ -1,10 +1,24 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:remove_h2o/size_config.dart';
 import 'package:remove_h2o/userlist_buttons/revoke_users.dart';
 
-class RevokeuserBody extends StatelessWidget {
+class RevokeuserBody extends StatefulWidget {
   const RevokeuserBody({Key? key}) : super(key: key);
 
+  @override
+  State<RevokeuserBody> createState() => _RevokeuserBodyState();
+}
+
+class _RevokeuserBodyState extends State<RevokeuserBody> {
+  final Stream<QuerySnapshot> usersStream = FirebaseFirestore.instance
+      .collection('Users')
+      .where('role', isEqualTo: 2)
+      
+      .where('deleted', isEqualTo: true)
+      .snapshots();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,34 +75,88 @@ class RevokeuserBody extends StatelessWidget {
               height: 1.0,
             ),
             SizedBox(height: 10),
-            Revokeuser(
-              // email: '',
-              // fname: "",
-              // lname: '',
-              // phoneNo: '',
-              text: "Parrot Sab",
-              press: () => {
-                showDialog(
-                  context: context,
-                  builder: (_) => AlertDialog(
-                    elevation: 24.0,
-                    backgroundColor: Colors.white,
-                    title: Text("NAME : Parrot Sab"),
-                    content: Text("Do you want to give access"),
-                    actions: <Widget>[
-                      FlatButton(
-                        child: Text("No"),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                      FlatButton(
-                        child: Text("Yes"),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                    ],
-                  ),
-                ),
-              },
-            ),
+            StreamBuilder<QuerySnapshot>(
+                stream: usersStream,
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Something went wrong');
+                  }
+
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Text("Loading");
+                  }
+
+                  return ListView(
+                      shrinkWrap: true,
+                      // itemCount: snapshot.data!.docs.length,
+                      // itemBuilder: ((context, index) {
+                      children:
+                          snapshot.data!.docs.map((DocumentSnapshot document) {
+                        Map<String, dynamic> data =
+                            document.data()! as Map<String, dynamic>;
+                        print(Text(data['firstName']));
+                        return Revokeuser(
+                          // email: '',
+                          // fname: "",
+                          // lname: '',
+                          // phoneNo: '',
+                          text: data['firstName'].toString(),
+                          // press: () => {
+                          //   showDialog(
+                          //     context: context,
+                          //     builder: (_) => AlertDialog(
+                          //       elevation: 24.0,
+                          //       backgroundColor: Colors.white,
+                          //       title: Text("NAME : Parrot Sab"),
+                          //       content: Text("Do you want to give access"),
+                          //       actions: <Widget>[
+                          //         FlatButton(
+                          //           child: Text("No"),
+                          //           onPressed: () => Navigator.pop(context),
+                          //         ),
+                          //         FlatButton(
+                          //           child: Text("Yes"),
+                          //           onPressed: () => Navigator.pop(context),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // },
+                        );
+                      }).toList());
+                  //     return Text('nodata');
+                  //   }),
+                  // );
+                }),
+            // Revokeuser(
+            //   // email: '',
+            //   // fname: "",
+            //   // lname: '',
+            //   // phoneNo: '',
+            //   text: "Parrot Sab",
+            //   press: () => {
+            //     showDialog(
+            //       context: context,
+            //       builder: (_) => AlertDialog(
+            //         elevation: 24.0,
+            //         backgroundColor: Colors.white,
+            //         title: Text("NAME : Parrot Sab"),
+            //         content: Text("Do you want to give access"),
+            //         actions: <Widget>[
+            //           FlatButton(
+            //             child: Text("No"),
+            //             onPressed: () => Navigator.pop(context),
+            //           ),
+            //           FlatButton(
+            //             child: Text("Yes"),
+            //             onPressed: () => Navigator.pop(context),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   },
+            // ),
           ],
         )
 

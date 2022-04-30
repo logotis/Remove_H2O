@@ -16,6 +16,14 @@ class PhotoData extends StatefulWidget {
 }
 
 class _PhotoDataState extends State<PhotoData> {
+
+ TextEditingController namecontroller = TextEditingController();
+  TextEditingController adresscontroller = TextEditingController();
+  TextEditingController cellcontroller = TextEditingController();
+  TextEditingController workcontroller = TextEditingController();
+  TextEditingController mailadresscontroller = TextEditingController();
+  TextEditingController workadresscontroller = TextEditingController();
+
   File? _image;
   File? _image1;
   File? _image2;
@@ -62,7 +70,7 @@ class _PhotoDataState extends State<PhotoData> {
   }
 
   Future<void> submitData() async {
-    FirebaseFirestore.instance.collection('Leads').add({
+  await  FirebaseFirestore.instance.collection('Leads').add({
       'name':namecontroller,
       'address':adresscontroller,
       'cellNo': cellcontroller,
@@ -72,12 +80,7 @@ class _PhotoDataState extends State<PhotoData> {
     });
   }
 
-  TextEditingController namecontroller = TextEditingController();
-  TextEditingController adresscontroller = TextEditingController();
-  TextEditingController cellcontroller = TextEditingController();
-  TextEditingController workcontroller = TextEditingController();
-  TextEditingController mailadresscontroller = TextEditingController();
-  TextEditingController workadresscontroller = TextEditingController();
+ 
 
   @override
   Widget build(BuildContext context) {

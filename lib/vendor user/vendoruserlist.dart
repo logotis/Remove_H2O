@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class Revokeuser extends StatelessWidget {
-  const Revokeuser({Key? key, required this.text,})
+class VendoruserList extends StatelessWidget {
+  const VendoruserList(
+      {Key? key, required this.text, required this.icon, required this.press})
       : super(key: key);
   final String text;
-  // final VoidCallback? press;
+  final IconData icon;
+  final VoidCallback? press;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,24 +21,16 @@ class Revokeuser extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           backgroundColor: Colors.grey[200],
         ),
-        onPressed: (){},
+        onPressed: press,
         child: Row(
           children: [
-            // IconButton(
-            //   icon: FaIcon(
-            //     icon,
-            //     color: Color.fromARGB(255, 8, 8, 8),
-            //   ),
-            //   iconSize: 40,
-            //   onPressed: null,
-            // ),
-            CircleAvatar(
-              radius: (30),
-              backgroundColor: Colors.white,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: Image.asset("assets/images/Profile Image.png"),
+            IconButton(
+              icon: FaIcon(
+                icon,
+                color: Color.fromARGB(255, 8, 8, 8),
               ),
+              iconSize: 40,
+              onPressed: null,
             ),
             SizedBox(width: 20),
             Expanded(child: Text(text)),

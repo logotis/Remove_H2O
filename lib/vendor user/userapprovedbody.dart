@@ -5,22 +5,26 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:remove_h2o/size_config.dart';
 import 'package:remove_h2o/userlist_buttons/approved_usersAccess.dart';
-
-class Apprrovedbody extends StatefulWidget {
-  const Apprrovedbody({Key? key}) : super(key: key);
+import 'package:remove_h2o/vendor%20user/useraprroved.dart';
+final auth = FirebaseAuth.instance;
+class Vendorapprrovedbody extends StatefulWidget {
+  
+  const Vendorapprrovedbody({Key? key}) : super(key: key);
 
   @override
-  State<Apprrovedbody> createState() => _ApprrovedbodyState();
+  State<Vendorapprrovedbody> createState() => _ApprrovedbodyState();
 }
 
-class _ApprrovedbodyState extends State<Apprrovedbody> {
-   final auth = FirebaseAuth.instance;
-  CollectionReference users = FirebaseFirestore.instance.collection('Users');
+class _ApprrovedbodyState extends State<Vendorapprrovedbody> {
+   
+  CollectionReference users = FirebaseFirestore.instance.collection('Users')
+  
+  ;
   final Stream<QuerySnapshot> usersStream = FirebaseFirestore.instance
       .collection('Users')
-      .where('role', isEqualTo: 2)
+    
+      .where('role', isEqualTo: 3)
       .where('approved', isEqualTo: true)
-      .where('suapproved', isEqualTo: true)
       .snapshots();
   @override
   Widget build(BuildContext context) {
@@ -100,7 +104,7 @@ class _ApprrovedbodyState extends State<Apprrovedbody> {
                         Map<String, dynamic> data =
                             document.data()! as Map<String, dynamic>;
                         print(Text(data['firstName']));
-                        return ApprovedUsers(
+                        return VendorapprovedUsers(
               // email: '',
               // fname: "",
               // lname: '',

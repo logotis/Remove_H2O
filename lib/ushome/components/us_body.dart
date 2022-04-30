@@ -10,18 +10,19 @@ import 'package:remove_h2o/leadgeneration_body.dart';
 import 'package:remove_h2o/screen_buttons/reportEmergency_Screen.dart';
 import 'package:remove_h2o/screen_buttons/send_referral.dart';
 import 'package:remove_h2o/screen_buttons/take_photo.dart';
-import 'package:remove_h2o/vendor%20user/vendoruserlistbody.dart';
+import 'package:remove_h2o/sphome/component/sp_home_menu.dart';
+import 'package:remove_h2o/userleadgenerationbody.dart';
+import 'package:remove_h2o/ushome/components/us_home_menu.dart';
 
-import 'home_menu.dart';
 
 UserCredential? userCredential;
 
-class Body extends StatefulWidget {
+class UsBody extends StatefulWidget {
   @override
-  State<Body> createState() => _BodyState();
+  State<UsBody> createState() => _BodyState();
 }
 
-class _BodyState extends State<Body> {
+class _BodyState extends State<UsBody> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -29,7 +30,7 @@ class _BodyState extends State<Body> {
       padding: EdgeInsets.symmetric(vertical: 20),
       child: Column(
         children: [
-           HomeMenu(
+           USHomeMenu(
                   text: "Report Emergency",
                   icon: FontAwesomeIcons.phone,
                   press: () => {
@@ -41,9 +42,8 @@ class _BodyState extends State<Body> {
                     ),
                   },
                 ),
-          
-          SizedBox(height: 20),
-          HomeMenu(
+                  SizedBox(height: 20),
+          USHomeMenu(
             text: "Send a Referral",
             icon: FontAwesomeIcons.users,
             press: () {
@@ -52,55 +52,18 @@ class _BodyState extends State<Body> {
             },
           ),
           SizedBox(height: 20),
-          // HomeMenu(
-          //         text: "Send a Picture",
-          //         icon: FontAwesomeIcons.camera,
-          //         press: () {
-          //           Navigator.push(context,
-          //               MaterialPageRoute(builder: (context) => PhotoData()));
-          //         },
-          //       ),
-          
-          // SizedBox(height: 20),
-          HomeMenu(
-            text: "User's List",
-            icon: FontAwesomeIcons.list,
-            press: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Vendoruserlistbody()));
-            },
-          ),
-          SizedBox(height: 20),
-           HomeMenu(
+        
+           USHomeMenu(
             text: "Lead Generation list",
             icon: FontAwesomeIcons.rectangleAd,
             press: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => Leadgenerationbody()));
+                      builder: (context) => UserLeadgenerationbody()));
             },
           ),
-          SizedBox(height: 20),
-          HomeMenu(
-            text: "Finance",
-            icon: FontAwesomeIcons.lineChart,
-            press: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Financescreen()));
-            },
-          ),
-          // SizedBox(height: 20),
-          // HomeMenu(
-          //   text: "Lead Generation list",
-          //   icon: FontAwesomeIcons.rectangleAd,
-          //   press: () {
-          //     Navigator.push(
-          //         context,
-          //         MaterialPageRoute(
-          //             builder: (context) => Leadgenerationbody()));
-          //   },
-          // ),
+         
         ],
       ),
     );
