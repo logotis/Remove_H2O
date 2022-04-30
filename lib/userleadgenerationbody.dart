@@ -1,14 +1,25 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:remove_h2o/leadgenerationscreen.dart';
 import 'package:remove_h2o/screen_buttons/take_photo.dart';
 import 'package:remove_h2o/size_config.dart';
 
-class UserLeadgenerationbody extends StatelessWidget {
+class UserLeadgenerationbody extends StatefulWidget {
   const UserLeadgenerationbody({Key? key}) : super(key: key);
 
+  @override
+  State<UserLeadgenerationbody> createState() => _UserLeadgenerationbodyState();
+}
+
+class _UserLeadgenerationbodyState extends State<UserLeadgenerationbody> {
+  final auth = FirebaseAuth.instance;
+  CollectionReference users = FirebaseFirestore.instance.collection('Leads');
+  final Stream<QuerySnapshot> usersStream =
+      FirebaseFirestore.instance.collection('Leads').snapshots();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,10 +66,36 @@ class UserLeadgenerationbody extends StatelessWidget {
               height: 25.0,
             ),
             SizedBox(height: 100),
-            LeadgenerationScreen(
-                text: "There is no Lead generation text",
-                icon: FontAwesomeIcons.hourglassEnd,
-                press: () {}),
+            StreamBuilder<QuerySnapshot>(
+                stream: usersStream,
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Something went wrong');
+                  }
+
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Text("Loading");
+                  }
+
+                  return ListView(
+                      shrinkWrap: true,
+                      // itemCount: snapshot.data!.docs.length,
+                      // itemBuilder: ((context, index) {
+                      children:
+                          snapshot.data!.docs.map((DocumentSnapshot document) {
+                        Map<String, dynamic> data =
+                            document.data()! as Map<String, dynamic>;
+                        print(Text(data['name']));
+                        return LeadgenerationScreen(
+                            text: data['name'],
+                            icon: FontAwesomeIcons.hourglassEnd,
+                            press: () {});
+                      }).toList());
+                  //     return Text('nodata');
+                  //   }),
+                  // );
+                }),
           ],
         ),
       ),
