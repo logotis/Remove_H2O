@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:remove_h2o/components/custom_surfix_icon.dart';
@@ -19,27 +20,35 @@ class Body extends StatelessWidget {
         child: Padding(
           padding:
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CircleAvatar( backgroundColor: Colors.black,
+              CircleAvatar(
+                  backgroundColor: Colors.black,
                   radius: 16,
-                  child: IconButton(onPressed: (){Navigator.pop(context);
-                  },  icon: Padding(
-                    padding: const EdgeInsets.only(left: 2.0,bottom: 1),
-                    child: Icon(Icons.arrow_back_ios,size: 18),
-                  ),)),
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Padding(
+                      padding: const EdgeInsets.only(left: 2.0, bottom: 1),
+                      child: Icon(Icons.arrow_back_ios, size: 18),
+                    ),
+                  )),
               Column(
                 children: [
-                 // SizedBox(height: SizeConfig.screenHeight * 0.04),
+                  // SizedBox(height: SizeConfig.screenHeight * 0.04),
                   Text(
                     "Forgot Password",
                     style: TextStyle(
-                     // fontSize: getProportionateScreenWidth(28),
+                      // fontSize: getProportionateScreenWidth(28),
                       color: Colors.black45,
                       //fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 20.0,),
+                  SizedBox(
+                    height: 20.0,
+                  ),
                   Text(
                     "Forgot Password",
                     style: TextStyle(
@@ -48,7 +57,9 @@ class Body extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 10.0,),
+                  SizedBox(
+                    height: 10.0,
+                  ),
                   Text(
                     "Please enter your email and we will send \nyou a link to return to your account",
                     textAlign: TextAlign.center,
@@ -71,10 +82,12 @@ class ForgotPassForm extends StatefulWidget {
 }
 
 class _ForgotPassFormState extends State<ForgotPassForm> {
+  TextEditingController editingController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
   List<String> errors = [];
   String? email;
-
+  final auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -83,20 +96,23 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
         children: [
           TextFormField(
             keyboardType: TextInputType.emailAddress,
-            onSaved: (newValue) => email = newValue,
-            onChanged: (value) {
-              if (value.isNotEmpty && errors.contains(kEmailNullError)) {
-                setState(() {
-                  errors.remove(kEmailNullError);
-                });
-              } else if (emailValidatorRegExp.hasMatch(value) &&
-                  errors.contains(kInvalidEmailError)) {
-                setState(() {
-                  errors.remove(kInvalidEmailError);
-                });
-              }
-              return null;
-            },
+            controller: editingController,
+            // onSaved: (newValue) => email = newValue,
+            // onChanged: (value) {
+            //   if (value.isNotEmpty && errors.contains(kEmailNullError)) {
+            //     setState(() {
+            //       errors.remove(kEmailNullError);
+            //     });
+            //   } else if (emailValidatorRegExp.hasMatch(value) &&
+            //       errors.contains(kInvalidEmailError)) {
+            //     setState(() {
+            //       errors.remove(kInvalidEmailError);
+            //     });
+            //   }
+            //   setState(() {
+            //     email = value;
+            //   });
+            // },
             validator: (value) {
               if (value!.isEmpty && !errors.contains(kEmailNullError)) {
                 setState(() {
@@ -112,7 +128,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
             },
             decoration: InputDecoration(
               labelText: "Email",
-            
+
               hintText: "Enter your email",
               // If  you are using latest version of flutter then lable text and hint text shown like this
               // if you r using flutter less then 1.20.* then maybe this is not working properly
@@ -128,6 +144,9 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
             press: () {
               if (_formKey.currentState!.validate()) {
                 // Do what you want to do
+                auth.sendPasswordResetEmail(
+                    email: editingController.text.trim());
+                Navigator.of(context).pop();
               }
             },
           ),

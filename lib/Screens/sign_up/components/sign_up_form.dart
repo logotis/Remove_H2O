@@ -105,8 +105,8 @@ class _SignUpFormState extends State<SignUpForm> {
   TextFormField buildPasswordFormField() {
     return TextFormField(
       validator: (value) {
-        if (value!.isEmpty || value.length < 7) {
-          return 'password must be at least & character.';
+        if (value!.isEmpty || value.length < 6) {
+          return 'password must be at least 6 character.';
         }
         return null;
       },

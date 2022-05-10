@@ -125,8 +125,8 @@ class _SignFormState extends State<SignForm> {
   TextFormField buildPasswordFormField() {
     return TextFormField(
       validator: (value) {
-        if (value!.isEmpty || value.length < 7) {
-          return 'password must be at least 7 character.';
+        if (value!.isEmpty || value.length < 6) {
+          return 'password must be at least 6 character.';
         }
         return null;
       },
