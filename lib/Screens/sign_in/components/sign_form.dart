@@ -124,6 +124,12 @@ class _SignFormState extends State<SignForm> {
 
   TextFormField buildPasswordFormField() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty || value.length < 7) {
+          return 'password must be at least 7 character.';
+        }
+        return null;
+      },
       controller: paswordcontroller,
       decoration: InputDecoration(
         labelText: "Password",
@@ -138,6 +144,12 @@ class _SignFormState extends State<SignForm> {
 
   TextFormField buildEmailFormField() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty || !value.contains('@')) {
+          return 'please enter a valid email adress.';
+        }
+        return null;
+      },
       controller: emailcontroller,
       decoration: InputDecoration(
         labelText: "Email",

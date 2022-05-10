@@ -1,9 +1,8 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:remove_h2o/Screens/home/Home_screen.dart';
+import 'package:remove_h2o/navigartion_drawer.dart';
 import 'package:remove_h2o/size_config.dart';
 
 class SendReferral extends StatelessWidget {
@@ -15,7 +14,6 @@ class SendReferral extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         iconTheme: IconThemeData(
           color: Colors.blue,
         ),
@@ -28,6 +26,21 @@ class SendReferral extends StatelessWidget {
           height: getProportionateScreenHeight(270),
         ),
       ),
+      // appBar: AppBar(
+      //   // automaticallyImplyLeading: false,
+      //   iconTheme: IconThemeData(
+      //     color: Colors.blue,
+      //   ),
+      //   toolbarHeight: 90,
+      //   backgroundColor: Colors.white,
+      //   brightness: Brightness.light,
+      //   centerTitle: true,
+      //   title: Image.asset(
+      //     "assets/images/logo.png",
+      //     height: getProportionateScreenHeight(270),
+      //   ),
+      // ),
+      drawer: NavigationDrawer(),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         child: Container(
@@ -39,7 +52,8 @@ class SendReferral extends StatelessWidget {
                 radius: 16,
                 child: IconButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Home()));
                   },
                   icon: Padding(
                     padding: const EdgeInsets.only(left: 2.0, bottom: 1),

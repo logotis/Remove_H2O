@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:remove_h2o/Screens/sign_up/sign_up_screen.dart';
 import 'package:remove_h2o/Screens/user_list/users_list.dart';
+import 'package:remove_h2o/navigartion_drawer.dart';
 import 'package:remove_h2o/size_config.dart';
 import 'package:remove_h2o/userlist_buttons/approved_usersBody.dart';
 import 'package:remove_h2o/userlist_buttons/pendingAccess_body.dart';
@@ -21,11 +22,6 @@ class _userlistbodyState extends State<userlistbody> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.menu),
-        ),
-        automaticallyImplyLeading: false,
         iconTheme: IconThemeData(
           color: Colors.blue,
         ),
@@ -38,6 +34,25 @@ class _userlistbodyState extends State<userlistbody> {
           height: getProportionateScreenHeight(270),
         ),
       ),
+      drawer: NavigationDrawer(),
+      // appBar: AppBar(
+      //   leading: IconButton(
+      //     onPressed: () {},
+      //     icon: Icon(Icons.menu),
+      //   ),
+      //   automaticallyImplyLeading: false,
+      //   iconTheme: IconThemeData(
+      //     color: Colors.blue,
+      //   ),
+      //   toolbarHeight: 90,
+      //   backgroundColor: Colors.white,
+      //   brightness: Brightness.light,
+      //   centerTitle: true,
+      //   title: Image.asset(
+      //     "assets/images/logo.png",
+      //     height: getProportionateScreenHeight(270),
+      //   ),
+      // ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         padding: EdgeInsets.symmetric(vertical: 20),
@@ -97,7 +112,8 @@ class _userlistbodyState extends State<userlistbody> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            Navigator.push(context, MaterialPageRoute(builder: (_)=>SignUpScreen()));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => SignUpScreen()));
           });
         },
         child: Icon(Icons.add),

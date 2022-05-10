@@ -3,11 +3,10 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:remove_h2o/navigartion_drawer.dart';
 import 'package:remove_h2o/size_config.dart';
 
 class PhotoData extends StatefulWidget {
@@ -18,18 +17,6 @@ class PhotoData extends StatefulWidget {
 }
 
 class _PhotoDataState extends State<PhotoData> {
-  TextEditingController namecontroller = TextEditingController();
-  TextEditingController adresscontroller = TextEditingController();
-  TextEditingController cellcontroller = TextEditingController();
-  TextEditingController workcontroller = TextEditingController();
-  TextEditingController mailadresscontroller = TextEditingController();
-  TextEditingController workadresscontroller = TextEditingController();
-
-  //  database storage reference
-  firebase_storage.Reference imageRef = firebase_storage
-      .FirebaseStorage.instance
-      .ref('Images / ${DateTime.now()}');
-
   File? _image;
   File? _image1;
   File? _image2;
@@ -75,43 +62,28 @@ class _PhotoDataState extends State<PhotoData> {
     }
   }
 
-  submitData() async {
-    UploadTask uploadTask = imageRef.putFile(_image!);
-    await Future.value(uploadTask);
-    var imageUrl = await imageRef.getDownloadURL();
-    UploadTask uploadTask1 = imageRef.putFile(_image1!);
-    await Future.value(uploadTask1);
-    var imageUrl1 = await imageRef.getDownloadURL();
-    UploadTask uploadTask2 = imageRef.putFile(_image2!);
-    await Future.value(uploadTask2);
-    var imageUrl2 = await imageRef.getDownloadURL();
-    UploadTask uploadTask3 = imageRef.putFile(_image3!);
-    await Future.value(uploadTask3);
-    var imageUrl3 = await imageRef.getDownloadURL();
-    FirebaseFirestore.instance.collection('Leads').doc().set({
-      'name': namecontroller.text,
-      'imageUrl': imageUrl,
-      'imageUrl1': imageUrl1,
-      'imageUrl2': imageUrl2,
-      'imageUrl3': imageUrl3,
-      'address': adresscontroller.text,
-      'cellNo': cellcontroller.text,
-      'work': workcontroller.text,
-      'mailadress': mailadresscontroller.text,
-      'workadress': workadresscontroller.text,
+  Future<void> submitData() async {
+    FirebaseFirestore.instance.collection('Leads').add({
+      'name': namecontroller,
+      'address': adresscontroller,
+      'cellNo': cellcontroller,
+      'work': workcontroller,
+      'mailadress': mailadresscontroller,
+      'workadress': workadresscontroller,
     });
-    Navigator.of(context).pop();
   }
+
+  TextEditingController namecontroller = TextEditingController();
+  TextEditingController adresscontroller = TextEditingController();
+  TextEditingController cellcontroller = TextEditingController();
+  TextEditingController workcontroller = TextEditingController();
+  TextEditingController mailadresscontroller = TextEditingController();
+  TextEditingController workadresscontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.menu),
-          ),
-          automaticallyImplyLeading: false,
           iconTheme: IconThemeData(
             color: Colors.blue,
           ),
@@ -124,6 +96,25 @@ class _PhotoDataState extends State<PhotoData> {
             height: getProportionateScreenHeight(270),
           ),
         ),
+        drawer: NavigationDrawer(),
+        // appBar: AppBar(
+        //   leading: IconButton(
+        //     onPressed: () {},
+        //     icon: Icon(Icons.menu),
+        //   ),
+        //   automaticallyImplyLeading: false,
+        //   iconTheme: IconThemeData(
+        //     color: Colors.blue,
+        //   ),
+        //   toolbarHeight: 90,
+        //   backgroundColor: Colors.white,
+        //   brightness: Brightness.light,
+        //   centerTitle: true,
+        //   title: Image.asset(
+        //     "assets/images/logo.png",
+        //     height: getProportionateScreenHeight(270),
+        //   ),
+        // ),
         body: SingleChildScrollView(
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           child: Column(

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:remove_h2o/components/custom_surfix_icon.dart';
@@ -110,6 +112,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
             },
             decoration: InputDecoration(
               labelText: "Email",
+            
               hintText: "Enter your email",
               // If  you are using latest version of flutter then lable text and hint text shown like this
               // if you r using flutter less then 1.20.* then maybe this is not working properly
@@ -135,3 +138,4 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
     );
   }
 }
+//df

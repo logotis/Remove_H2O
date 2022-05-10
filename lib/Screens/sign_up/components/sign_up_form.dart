@@ -104,6 +104,12 @@ class _SignUpFormState extends State<SignUpForm> {
 
   TextFormField buildPasswordFormField() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty || value.length < 7) {
+          return 'password must be at least & character.';
+        }
+        return null;
+      },
       controller: passwordcontroller,
       decoration: InputDecoration(
         labelText: "Password",
@@ -116,6 +122,12 @@ class _SignUpFormState extends State<SignUpForm> {
 
   TextFormField buildEmailFormField() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty || !value.contains('@')) {
+          return 'please enter a valid email adress.';
+        }
+        return null;
+      },
       controller: econtroller,
       decoration: InputDecoration(
         labelText: "Email",
@@ -128,6 +140,12 @@ class _SignUpFormState extends State<SignUpForm> {
 
   TextFormField buildfnameFormField() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please Enter Your name.';
+        }
+        return null;
+      },
       controller: fcontroller,
       decoration: InputDecoration(
         labelText: "Name",
@@ -140,6 +158,12 @@ class _SignUpFormState extends State<SignUpForm> {
 
   TextFormField buildphonenumberFormField() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please Enter Your phone number.';
+        }
+        return null;
+      },
       controller: pcontroller,
       decoration: InputDecoration(
         labelText: "Phone#",
@@ -152,6 +176,12 @@ class _SignUpFormState extends State<SignUpForm> {
 
   TextFormField buildlastnameFormField() {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please Enter Your Adress.';
+        }
+        return null;
+      },
       controller: lcontroller,
       decoration: InputDecoration(
         labelText: "Adress",

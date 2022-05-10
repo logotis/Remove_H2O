@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:remove_h2o/navigartion_drawer.dart';
 import 'package:remove_h2o/size_config.dart';
 import 'package:remove_h2o/userlist_buttons/revoke_users.dart';
 
@@ -23,11 +24,6 @@ class _RevokeuserBodyState extends State<RevokeuserBody> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.menu),
-          ),
-          automaticallyImplyLeading: false,
           iconTheme: IconThemeData(
             color: Colors.blue,
           ),
@@ -40,6 +36,25 @@ class _RevokeuserBodyState extends State<RevokeuserBody> {
             height: getProportionateScreenHeight(270),
           ),
         ),
+        drawer: NavigationDrawer(),
+        // appBar: AppBar(
+        //   leading: IconButton(
+        //     onPressed: () {},
+        //     icon: Icon(Icons.menu),
+        //   ),
+        //   automaticallyImplyLeading: false,
+        //   iconTheme: IconThemeData(
+        //     color: Colors.blue,
+        //   ),
+        //   toolbarHeight: 90,
+        //   backgroundColor: Colors.white,
+        //   brightness: Brightness.light,
+        //   centerTitle: true,
+        //   title: Image.asset(
+        //     "assets/images/logo.png",
+        //     height: getProportionateScreenHeight(270),
+        //   ),
+        // ),
         body:
 
             // SingleChildScrollView(

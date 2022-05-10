@@ -2,15 +2,31 @@
 
 import 'package:flutter/material.dart';
 import 'package:remove_h2o/Screens/home/Home_screen.dart';
+import 'package:remove_h2o/navigartion_drawer.dart';
 import 'package:remove_h2o/size_config.dart';
 
 class abtpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-      child: Container(
-        child: Column(
+    return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.blue,
+        ),
+        toolbarHeight: 90,
+        backgroundColor: Colors.white,
+        brightness: Brightness.light,
+        centerTitle: true,
+        title: Image.asset(
+          "assets/images/logo.png",
+          height: getProportionateScreenHeight(270),
+        ),
+      ),
+      drawer: NavigationDrawer(),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        child: Container(
+            child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CircleAvatar(
@@ -26,7 +42,9 @@ class abtpage extends StatelessWidget {
                     child: Icon(Icons.arrow_back_ios, size: 18),
                   ),
                 )),
-            SizedBox(height: 55.0,),
+            SizedBox(
+              height: 55.0,
+            ),
             Text(
               'About Us:',
               style: TextStyle(
@@ -40,8 +58,7 @@ class abtpage extends StatelessWidget {
               width: 320.0,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(
-                      'assets/images/ambulance.jpg'),
+                  image: AssetImage('assets/images/ambulance.jpg'),
                   fit: BoxFit.fill,
                 ),
                 shape: BoxShape.rectangle,
@@ -53,14 +70,15 @@ class abtpage extends StatelessWidget {
                 // ignore: prefer_const_literals_to_create_immutables
                 children: <TextSpan>[
                   //TextSpan(text: '', style: TextStyle(color: Colors.blue)),
-                  TextSpan(text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently  desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum'),
+                  TextSpan(
+                      text:
+                          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently  desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum'),
                   //TextSpan(text: 'com', style: TextStyle(decoration: TextDecoration.underline))
                 ],
               ),
             )
           ],
-
-        )
+        )),
       ),
     );
   }
