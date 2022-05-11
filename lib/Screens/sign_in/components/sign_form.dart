@@ -36,14 +36,11 @@ class _SignFormState extends State<SignForm> {
         emailcontroller.text.trim(),
         paswordcontroller.text.trim(),
       );
-      print(emailcontroller);
-
-      print(paswordcontroller);
+    
     }
   }
 
-  // String? email;
-  // String? password;
+
   bool? remember = false;
   final List<String?> errors = [];
 

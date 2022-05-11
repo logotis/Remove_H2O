@@ -1,15 +1,28 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:remove_h2o/Screens/home/Home_screen.dart';
 import 'package:remove_h2o/navigartion_drawer.dart';
 import 'package:remove_h2o/size_config.dart';
+import 'package:share_plus/share_plus.dart';
 
-class SendReferral extends StatelessWidget {
+class SendReferral extends StatefulWidget {
+  @override
+  State<SendReferral> createState() => _SendReferralState();
+}
+
+class _SendReferralState extends State<SendReferral> {
+  void SendFbData() {
+    Share.share('www.facebook.com');
+  }
+
+  void SendTwData() {
+    Share.share('www.twitter.com');
+  }
+
   // final IconData icon;
-  // const socialpage({Key? key,
-  //   required this.icon}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,8 +65,7 @@ class SendReferral extends StatelessWidget {
                 radius: 16,
                 child: IconButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Home()));
+                    Navigator.of(context).pop();
                   },
                   icon: Padding(
                     padding: const EdgeInsets.only(left: 2.0, bottom: 1),
@@ -89,11 +101,17 @@ class SendReferral extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          IconContainer(image: 'assets/icons/facebook-2.svg'),
+                          GestureDetector(
+                              onTap: SendFbData,
+                              child: IconContainer(
+                                  image: 'assets/icons/facebook-2.svg')),
                           SizedBox(
                             width: 20.0,
                           ),
-                          IconContainer(image: 'assets/icons/twitter.svg'),
+                          GestureDetector(
+                              onTap: SendTwData,
+                              child: IconContainer(
+                                  image: 'assets/icons/twitter.svg')),
                           SizedBox(
                             width: 20.0,
                           ),

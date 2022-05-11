@@ -8,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:remove_h2o/navigartion_drawer.dart';
 import 'package:remove_h2o/size_config.dart';
+import 'package:share_plus/share_plus.dart';
 
 class PhotoData extends StatefulWidget {
   const PhotoData({Key? key}) : super(key: key);
@@ -17,6 +18,7 @@ class PhotoData extends StatefulWidget {
 }
 
 class _PhotoDataState extends State<PhotoData> {
+  final _formKey = GlobalKey<FormState>();
   File? _image;
   File? _image1;
   File? _image2;
@@ -62,15 +64,35 @@ class _PhotoDataState extends State<PhotoData> {
     }
   }
 
-  Future<void> submitData() async {
-    FirebaseFirestore.instance.collection('Leads').add({
-      'name': namecontroller,
-      'address': adresscontroller,
-      'cellNo': cellcontroller,
-      'work': workcontroller,
-      'mailadress': mailadresscontroller,
-      'workadress': workadresscontroller,
-    });
+  void ShowSnackBar(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text('Data uploaded successfully'),
+      backgroundColor: Colors.blue,
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  Future submitData() async {
+    final isValid = _formKey.currentState!.validate();
+
+    if (isValid) {
+      _formKey.currentState!.save();
+      namecontroller.text.trim();
+      adresscontroller.text.trim();
+      cellcontroller.text.trim();
+      workcontroller.text.trim();
+      mailadresscontroller.text.trim();
+      workadresscontroller.text.trim();
+
+      FirebaseFirestore.instance.collection('Leads').add({
+        'name': namecontroller.text.trim(),
+        'address': adresscontroller.text.trim(),
+        'cellNo': cellcontroller.text.trim(),
+        'work': workcontroller.text.trim(),
+        'mailadress': mailadresscontroller.text.trim(),
+        'workadress': workadresscontroller.text.trim(),
+      }).then((value) => ShowSnackBar(context));
+    }
   }
 
   TextEditingController namecontroller = TextEditingController();
@@ -83,40 +105,42 @@ class _PhotoDataState extends State<PhotoData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          iconTheme: IconThemeData(
-            color: Colors.blue,
-          ),
-          toolbarHeight: 90,
-          backgroundColor: Colors.white,
-          brightness: Brightness.light,
-          centerTitle: true,
-          title: Image.asset(
-            "assets/images/logo.png",
-            height: getProportionateScreenHeight(270),
-          ),
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.blue,
         ),
-        drawer: NavigationDrawer(),
-        // appBar: AppBar(
-        //   leading: IconButton(
-        //     onPressed: () {},
-        //     icon: Icon(Icons.menu),
-        //   ),
-        //   automaticallyImplyLeading: false,
-        //   iconTheme: IconThemeData(
-        //     color: Colors.blue,
-        //   ),
-        //   toolbarHeight: 90,
-        //   backgroundColor: Colors.white,
-        //   brightness: Brightness.light,
-        //   centerTitle: true,
-        //   title: Image.asset(
-        //     "assets/images/logo.png",
-        //     height: getProportionateScreenHeight(270),
-        //   ),
-        // ),
-        body: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        toolbarHeight: 90,
+        backgroundColor: Colors.white,
+        brightness: Brightness.light,
+        centerTitle: true,
+        title: Image.asset(
+          "assets/images/logo.png",
+          height: getProportionateScreenHeight(270),
+        ),
+      ),
+      drawer: NavigationDrawer(),
+      // appBar: AppBar(
+      //   leading: IconButton(
+      //     onPressed: () {},
+      //     icon: Icon(Icons.menu),
+      //   ),
+      //   automaticallyImplyLeading: false,
+      //   iconTheme: IconThemeData(
+      //     color: Colors.blue,
+      //   ),
+      //   toolbarHeight: 90,
+      //   backgroundColor: Colors.white,
+      //   brightness: Brightness.light,
+      //   centerTitle: true,
+      //   title: Image.asset(
+      //     "assets/images/logo.png",
+      //     height: getProportionateScreenHeight(270),
+      //   ),
+      // ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        child: Form(
+          key: _formKey,
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,73 +158,27 @@ class _PhotoDataState extends State<PhotoData> {
                     ),
                   )),
               SizedBox(height: 16),
-              TextFormField(
-                controller: namecontroller,
-                decoration: InputDecoration(
-                  hintText: "Enter C_name",
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                ),
-              ),
+              buildnameFormField(),
               SizedBox(
                 height: 8,
               ),
-              TextFormField(
-                controller: adresscontroller,
-                decoration: InputDecoration(
-                  hintText: "Enter Address",
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                ),
-              ),
+              buildfadressFormField(),
               SizedBox(
                 height: 8,
               ),
-              TextFormField(
-                controller: cellcontroller,
-                decoration: InputDecoration(
-                  hintText: "Enter Cell#",
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                ),
-              ),
+              buildcellFormField(),
               SizedBox(
                 height: 8,
               ),
-              // TextFormField(
-              //   decoration: InputDecoration(
-              //     hintText: "Enter Your New Address",
-              //     floatingLabelBehavior: FloatingLabelBehavior.always,
-              //   ),
-              // ),
-              // SizedBox(
-              //   height: 8,
-              // ),
-              TextFormField(
-                controller: workcontroller,
-                decoration: InputDecoration(
-                  hintText: "Enter Work",
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                ),
-              ),
+              buildfworkFormField(),
               SizedBox(
                 height: 8,
               ),
-              TextFormField(
-                controller: mailadresscontroller,
-                decoration: InputDecoration(
-                  hintText: "Enter Email Addess",
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                ),
-              ),
+              buildfmailFormField(),
               SizedBox(
                 height: 8,
               ),
-              TextFormField(
-                controller: workadresscontroller,
-                maxLines: 4,
-                decoration: InputDecoration(
-                  hintText: "Enter Work Addess",
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                ),
-              ),
+              buildfworkaFormField(),
               SizedBox(
                 height: 8.0,
               ),
@@ -342,6 +320,104 @@ class _PhotoDataState extends State<PhotoData> {
               )
             ],
           ),
-        ));
+        ),
+      ),
+    );
+  }
+
+  TextFormField buildnameFormField() {
+    return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please Enter Your C_name.';
+        }
+        return null;
+      },
+      controller: namecontroller,
+      decoration: InputDecoration(
+        hintText: "Enter C_name",
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+      ),
+    );
+  }
+
+  TextFormField buildfadressFormField() {
+    return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please Enter Your Adress.';
+        }
+        return null;
+      },
+      controller: adresscontroller,
+      decoration: InputDecoration(
+        hintText: "Enter Your Adress",
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+      ),
+    );
+  }
+
+  TextFormField buildcellFormField() {
+    return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please Enter Your Cell No.';
+        }
+        return null;
+      },
+      controller: cellcontroller,
+      decoration: InputDecoration(
+        hintText: "Enter Cell#",
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+      ),
+    );
+  }
+
+  TextFormField buildfworkFormField() {
+    return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please Enter Your work.';
+        }
+        return null;
+      },
+      controller: workcontroller,
+      decoration: InputDecoration(
+        hintText: "Enter Work",
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+      ),
+    );
+  }
+
+  TextFormField buildfmailFormField() {
+    return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please Enter Your Email.';
+        }
+        return null;
+      },
+      controller: mailadresscontroller,
+      decoration: InputDecoration(
+        hintText: "Enter Email Adress",
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+      ),
+    );
+  }
+
+  TextFormField buildfworkaFormField() {
+    return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please Enter Your Work Adress.';
+        }
+        return null;
+      },
+      controller: workadresscontroller,
+      decoration: InputDecoration(
+        hintText: "Enter Work Adress",
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+      ),
+    );
   }
 }

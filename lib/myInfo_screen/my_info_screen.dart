@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class Infopage extends StatelessWidget { final String text;
 final IconData icon;
-final VoidCallback? press;
+final VoidCallback press;
 const Infopage({Key? key,required this.text,
   required this.icon,
-  this.press,}) : super(key: key);
+  required this.press,}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

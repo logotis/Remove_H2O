@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:remove_h2o/Screens/sign_in/sign_in_screen.dart';
 import 'package:remove_h2o/myInfo_screen/my_info_screen.dart';
 import 'package:remove_h2o/navigartion_drawer.dart';
 import 'package:remove_h2o/profileUpdate_appinfo/upgradeAddress.dart';
@@ -21,19 +22,20 @@ class _InfoscreenbodyState extends State<Infoscreenbody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.blue,
-        ),
-        toolbarHeight: 90,
-        backgroundColor: Colors.white,
-        brightness: Brightness.light,
-        centerTitle: true,
-        title: Image.asset(
-          "assets/images/logo.png",
-          height: getProportionateScreenHeight(270),
-        ),
-      ),
+      // appBar:
+      // AppBar(
+      //   iconTheme: IconThemeData(
+      //     color: Colors.blue,
+      //   ),
+      //   toolbarHeight: 90,
+      //   backgroundColor: Colors.white,
+      //   brightness: Brightness.light,
+      //   centerTitle: true,
+      //   title: Image.asset(
+      //     "assets/images/logo.png",
+      //     height: getProportionateScreenHeight(270),
+      //   ),
+      // ),
       drawer: NavigationDrawer(),
       body:
           // SingleChildScrollView(
@@ -144,7 +146,11 @@ class _InfoscreenbodyState extends State<Infoscreenbody> {
                 Infopage(
                   text: "Log Out",
                   icon: FontAwesomeIcons.signOut,
-                  press: () {},
+                  press: () async {
+                    await auth.signOut();
+                    User? user = auth.currentUser;
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: ((context) => SignInScreen())));
+                  },
                 ),
               ],
             );
