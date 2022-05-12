@@ -1,3 +1,6 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:remove_h2o/Screens/home/Home_screen.dart';
@@ -50,21 +53,48 @@ class ContactusBody extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 )),
             SizedBox(height: 20),
-            ctspage(
-              text: "Theodore Lowe",
-              icon: FontAwesomeIcons.mapLocationDot,
-              press: null,
-            ),
-            ctspage(
-              text: "123-456-789",
-              icon: FontAwesomeIcons.phone,
-              press: null,
-            ),
-            ctspage(
-              text: "www.abc.com",
-              icon: FontAwesomeIcons.globe,
-              press: null,
-            ),
+            StreamBuilder(
+              stream:
+                  FirebaseFirestore.instance.collection('Users').snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError) {
+                  return Text('Something went wrong');
+                }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Text("Loading");
+                }
+                return ListView(
+                    shrinkWrap: true,
+                    // itemCount: snapshot.data!.docs.length,
+                    // itemBuilder: ((context, index) {
+                    children:
+                        snapshot.data!.docs.map((DocumentSnapshot document) {
+                      Map<String, dynamic> data =
+                          document.data()! as Map<String, dynamic>;
+                     
+                      return Column(
+                        children: [
+                          ctspage(
+                            text: data['firstName'],
+                            icon: FontAwesomeIcons.mapLocationDot,
+                            press: null,
+                          ),
+                          ctspage(
+                            text: data['phoneNo'],
+                            icon: FontAwesomeIcons.phone,
+                            press: null,
+                          ),
+                          ctspage(
+                            text: "www.abc.com",
+                            icon: FontAwesomeIcons.globe,
+                            press: null,
+                          ),
+                        ],
+                      );
+                    }).toList());
+              },
+            )
           ],
         ),
       ),

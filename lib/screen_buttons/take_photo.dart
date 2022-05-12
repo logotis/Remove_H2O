@@ -3,10 +3,13 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:remove_h2o/navigartion_drawer.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
 import 'package:remove_h2o/size_config.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -18,6 +21,9 @@ class PhotoData extends StatefulWidget {
 }
 
 class _PhotoDataState extends State<PhotoData> {
+    firebase_storage.Reference imageRef = firebase_storage
+      .FirebaseStorage.instance
+      .ref('Images / ${DateTime.now()}');
   final _formKey = GlobalKey<FormState>();
   File? _image;
   File? _image1;
@@ -83,7 +89,18 @@ class _PhotoDataState extends State<PhotoData> {
       workcontroller.text.trim();
       mailadresscontroller.text.trim();
       workadresscontroller.text.trim();
-
+   UploadTask uploadTask = imageRef.putFile(_image!);
+    await Future.value(uploadTask);
+    var imageUrl = await imageRef.getDownloadURL();
+    UploadTask uploadTask1 = imageRef.putFile(_image1!);
+    await Future.value(uploadTask1);
+    var imageUrl1 = await imageRef.getDownloadURL();
+    UploadTask uploadTask2 = imageRef.putFile(_image2!);
+    await Future.value(uploadTask2);
+    var imageUrl2 = await imageRef.getDownloadURL();
+    UploadTask uploadTask3 = imageRef.putFile(_image3!);
+    await Future.value(uploadTask3);
+    var imageUrl3 = await imageRef.getDownloadURL();
       FirebaseFirestore.instance.collection('Leads').add({
         'name': namecontroller.text.trim(),
         'address': adresscontroller.text.trim(),

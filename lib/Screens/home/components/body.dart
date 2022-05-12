@@ -44,20 +44,18 @@ class _BodyState extends State<Body> {
         padding: EdgeInsets.symmetric(vertical: 20),
         child: Column(
           children: [
-            Roles.vendor == 2
-                ? HomeMenu(
-                    text: "Report Emergency",
-                    icon: FontAwesomeIcons.phone,
-                    press: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ReportEmergency(),
-                        ),
-                      ),
-                    },
-                  )
-                : Text(''),
+            HomeMenu(
+              text: "Report Emergency",
+              icon: FontAwesomeIcons.phone,
+              press: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ReportEmergency(),
+                  ),
+                ),
+              },
+            ),
             SizedBox(height: 20),
             HomeMenu(
               text: "Send a Referral",
@@ -68,19 +66,17 @@ class _BodyState extends State<Body> {
               },
             ),
             SizedBox(height: 20),
-            Roles.vendor == 2
-                ? HomeMenu(
-                    text: "Send a Picture",
-                    icon: FontAwesomeIcons.camera,
-                    press: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => PhotoData()));
-                    },
-                  )
-                : Text(''),
+            HomeMenu(
+              text: "Send a Picture",
+              icon: FontAwesomeIcons.camera,
+              press: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PhotoData()));
+              },
+            ),
             SizedBox(height: 20),
             HomeMenu(
-              text: "Vendor's List",
+              text: "User's List",
               icon: FontAwesomeIcons.list,
               press: () {
                 Navigator.push(context,

@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:remove_h2o/Screens/home/Home_screen.dart';
@@ -90,11 +92,40 @@ class ReportEMG extends StatelessWidget {
                       SizedBox(
                         height: 40.0,
                       ),
-                      Text(
-                        '123-456-789',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 55.0, fontWeight: FontWeight.bold),
+                      StreamBuilder(
+                        stream: FirebaseFirestore.instance
+                            .collection('Users')
+                            .where('docId',
+                                isEqualTo:
+                                    FirebaseAuth.instance.currentUser!.uid)
+                            .snapshots(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<QuerySnapshot> snapshot) {
+                          if (snapshot.hasError) {
+                            return Text('Something went wrong');
+                          }
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Text("Loading");
+                          }
+                          return ListView(
+                              shrinkWrap: true,
+                              // itemCount: snapshot.data!.docs.length,
+                              // itemBuilder: ((context, index) {
+                              children: snapshot.data!.docs
+                                  .map((DocumentSnapshot document) {
+                                Map<String, dynamic> data =
+                                    document.data()! as Map<String, dynamic>;
+
+                                return Text(
+                                  data['phoneNo'],
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 55.0,
+                                      fontWeight: FontWeight.bold),
+                                );
+                              }).toList());
+                        },
                       ),
                       SizedBox(
                         height: 45.0,
