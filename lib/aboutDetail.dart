@@ -2,6 +2,7 @@
 
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -19,11 +20,13 @@ class AboutDetail extends StatefulWidget {
 
 class _AboutDetailState extends State<AboutDetail> {
   final _formKey = GlobalKey<FormState>();
+  final _auth = FirebaseAuth.instance;
   firebase_storage.Reference imageRef = firebase_storage
       .FirebaseStorage.instance
       .ref('Images / ${DateTime.now()}');
   TextEditingController workadresscontroller = TextEditingController();
   File? _image;
+  File? _logo;
   Future getImage() async {
     final image = await ImagePicker().pickImage(source: ImageSource.camera);
     if (image != null) {
@@ -33,48 +36,79 @@ class _AboutDetailState extends State<AboutDetail> {
       });
     }
   }
-void ShowSnackBar(BuildContext context) {
+
+  Future getlogo() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.camera);
+    if (image != null) {
+      final imageTem = File(image.path);
+      setState(() {
+        _logo = imageTem;
+      });
+    }
+  }
+
+  void ShowSnackBar(BuildContext context) {
     final snackBar = SnackBar(
       content: Text('Data uploaded successfully'),
       backgroundColor: Colors.blue,
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
+
   Future submitData() async {
     final isValid = _formKey.currentState!.validate();
 
     if (isValid) {
       _formKey.currentState!.save();
-     
+
       workadresscontroller.text.trim();
-    UploadTask uploadTask = imageRef.putFile(_image!);
-    await Future.value(uploadTask);
-    var imageUrl = await imageRef.getDownloadURL();
-      FirebaseFirestore.instance.collection('Vendor Data').add({
+      UploadTask uploadTask = imageRef.putFile(_image!);
+      await Future.value(uploadTask);
+      var imageUrl = await imageRef.getDownloadURL();
+      UploadTask uploadTask1 = imageRef.putFile(_logo!);
+      await Future.value(uploadTask);
+      var imageUrl1 = await imageRef.getDownloadURL();
+      FirebaseFirestore.instance
+          .collection('Vendor Data')
+          .doc(_auth.currentUser!.uid)
+          .set({
         'workadress': workadresscontroller.text.trim(),
-        'imageUrl':imageUrl,
+        'imageUrl': imageUrl,
+        'logo': imageUrl1,
       }).then((value) => ShowSnackBar(context));
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.blue,
-        ),
-        toolbarHeight: 90,
-        backgroundColor: Colors.white,
-        brightness: Brightness.light,
-        centerTitle: true,
-        title: Image.asset(
-          "assets/images/logo.png",
-          height: getProportionateScreenHeight(270),
-        ),
-      ),
+      appBar: _logo == null
+          ? AppBar(
+              iconTheme: IconThemeData(
+                color: Colors.blue,
+              ),
+              toolbarHeight: 90,
+              backgroundColor: Colors.white,
+              brightness: Brightness.light,
+              centerTitle: true,
+              title: TextButton(
+                onPressed: getlogo,
+                child: Text('Update Logo'),
+              ),
+            )
+          : AppBar(
+              iconTheme: IconThemeData(
+                color: Colors.blue,
+              ),
+              toolbarHeight: 90,
+              backgroundColor: Colors.white,
+              brightness: Brightness.light,
+              centerTitle: true,
+              title: Image.file(
+                _logo!,
+                height: getProportionateScreenHeight(270),
+              ),
+            ),
       drawer: NavigationDrawer(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -153,7 +187,7 @@ void ShowSnackBar(BuildContext context) {
     return TextFormField(
       validator: (value) {
         if (value!.isEmpty) {
-    return 'Please Enter Description.';
+          return 'Please Enter Description.';
         }
         return null;
       },
