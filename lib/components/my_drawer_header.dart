@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:remove_h2o/Screens/aboutus_screen.dart';
 import 'package:remove_h2o/size_config.dart';
 
 class MyHeaderDrawer extends StatefulWidget {
@@ -17,6 +18,20 @@ class MyHeaderDrawerState extends State<MyHeaderDrawer> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // appbarlogo.isNotEmpty
+          //     ? Container(
+          //         margin: const EdgeInsets.only(
+          //           bottom: 10.0,
+          //         ),
+          //         height: getProportionateScreenHeight(70),
+          //         decoration: BoxDecoration(
+          //           image: DecorationImage(
+          //             fit: BoxFit.cover,
+          //             image: NetworkImage(appbarlogo),
+          //           ),
+          //         ),
+          //       )
+          //     :
           Container(
             margin: const EdgeInsets.only(
               bottom: 10.0,

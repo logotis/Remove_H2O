@@ -10,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:remove_h2o/navigartion_drawer.dart';
 import 'package:remove_h2o/size_config.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:remove_h2o/vendor%20user/userapprovedbody.dart';
 
 class AboutDetail extends StatefulWidget {
   const AboutDetail({Key? key}) : super(key: key);
@@ -68,13 +69,14 @@ class _AboutDetailState extends State<AboutDetail> {
       UploadTask uploadTask1 = imageRef.putFile(_logo!);
       await Future.value(uploadTask);
       var imageUrl1 = await imageRef.getDownloadURL();
-      FirebaseFirestore.instance
+      DocumentReference ref = FirebaseFirestore.instance
           .collection('Vendor Data')
-          .doc(_auth.currentUser!.uid)
-          .set({
+          .doc(auth.currentUser!.uid);
+      ref.set({
         'workadress': workadresscontroller.text.trim(),
         'imageUrl': imageUrl,
         'logo': imageUrl1,
+        'docId': ref.id,
       }).then((value) => ShowSnackBar(context));
     }
   }

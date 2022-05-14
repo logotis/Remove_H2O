@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:remove_h2o/Screens/aboutus_screen.dart';
 import 'package:remove_h2o/Screens/user_list/userList_body.dart';
 import 'package:remove_h2o/enum.dart';
 import 'package:remove_h2o/financescreen.dart';
@@ -33,10 +34,15 @@ class _BodyState extends State<Body> {
         backgroundColor: Colors.white,
         brightness: Brightness.light,
         centerTitle: true,
-        title: Image.asset(
-          "assets/images/logo.png",
-          height: getProportionateScreenHeight(270),
-        ),
+        title: appbarlogo.isNotEmpty
+            ? Image.network(
+                appbarlogo,
+                height: getProportionateScreenHeight(270),
+              )
+            : Image.asset(
+                "assets/images/logo.png",
+                height: getProportionateScreenHeight(270),
+              ),
       ),
       drawer: NavigationDrawer(),
       body: SingleChildScrollView(

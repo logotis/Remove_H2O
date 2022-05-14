@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:remove_h2o/Screens/aboutus_screen.dart';
 import 'package:remove_h2o/Screens/home/Home_screen.dart';
 import 'package:remove_h2o/contactus/contactus_screen.dart';
 import 'package:remove_h2o/navigartion_drawer.dart';
@@ -20,7 +21,13 @@ class ContactusBody extends StatelessWidget {
         backgroundColor: Colors.white,
         brightness: Brightness.light,
         centerTitle: true,
-        title: Image.asset(
+        title: appbarlogo.isNotEmpty
+            ? Image.network(
+                appbarlogo,
+                height: getProportionateScreenHeight(270),
+              )
+            : 
+        Image.asset(
           "assets/images/logo.png",
           height: getProportionateScreenHeight(270),
         ),
