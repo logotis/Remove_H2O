@@ -3,7 +3,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:remove_h2o/Screens/home/Home_screen.dart';
 import 'package:remove_h2o/navigartion_drawer.dart';
 import 'package:remove_h2o/size_config.dart';
 import 'package:share_plus/share_plus.dart';
@@ -118,10 +117,10 @@ class _SendReferralState extends State<SendReferral> {
                           IconContainer(image: 'assets/icons/google-icon.svg'),
                         ],
                       ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      IconContainer(image: 'assets/icons/twitter.svg'),
+                      // SizedBox(
+                      //   height: 20.0,
+                      // ),
+                      // IconContainer(image: 'assets/icons/twitter.svg'),
                     ],
                   ),
                 ),

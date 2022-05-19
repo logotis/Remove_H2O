@@ -22,20 +22,19 @@ class _InfoscreenbodyState extends State<Infoscreenbody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar:
-      // AppBar(
-      //   iconTheme: IconThemeData(
-      //     color: Colors.blue,
-      //   ),
-      //   toolbarHeight: 90,
-      //   backgroundColor: Colors.white,
-      //   brightness: Brightness.light,
-      //   centerTitle: true,
-      //   title: Image.asset(
-      //     "assets/images/logo.png",
-      //     height: getProportionateScreenHeight(270),
-      //   ),
-      // ),
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.blue,
+        ),
+        toolbarHeight: 90,
+        backgroundColor: Colors.white,
+        brightness: Brightness.light,
+        centerTitle: true,
+        title: Image.asset(
+          "assets/images/logo.png",
+          height: getProportionateScreenHeight(270),
+        ),
+      ),
       drawer: NavigationDrawer(),
       body:
           // SingleChildScrollView(
@@ -111,48 +110,51 @@ class _InfoscreenbodyState extends State<Infoscreenbody> {
           if (snapshot.connectionState == ConnectionState.done) {
             Map<String, dynamic> data =
                 snapshot.data!.data() as Map<String, dynamic>;
-            return ListView(
-              children: [
-                Infopage(
-                  text: data['email'],
-                  icon: FontAwesomeIcons.envelopeOpen,
-                  press: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Emailupgrade()),
-                    );
-                  },
-                ),
-                Infopage(
-                  text: data['phoneNo'],
-                  icon: FontAwesomeIcons.phoneSquare,
-                  press: () {
-                    Navigator.push(
+            return Center(
+              child: ListView(
+                children: [
+                  Infopage(
+                    text: data['email'],
+                    icon: FontAwesomeIcons.envelopeOpen,
+                    press: () {
+                      Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => Numberupgrade()));
-                  },
-                ),
-                Infopage(
-                  text: data['Adress'],
-                  icon: FontAwesomeIcons.mapLocationDot,
-                  press: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => AddressUpgrade()));
-                  },
-                ),
-                Infopage(
-                  text: "Log Out",
-                  icon: FontAwesomeIcons.signOut,
-                  press: () async {
-                    await auth.signOut();
-                    User? user = auth.currentUser;
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: ((context) => SignInScreen())));
-                  },
-                ),
-              ],
+                        MaterialPageRoute(builder: (context) => Emailupgrade()),
+                      );
+                    },
+                  ),
+                  Infopage(
+                    text: data['phoneNo'],
+                    icon: FontAwesomeIcons.phoneSquare,
+                    press: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Numberupgrade()));
+                    },
+                  ),
+                  Infopage(
+                    text: data['Adress'],
+                    icon: FontAwesomeIcons.mapLocationDot,
+                    press: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AddressUpgrade()));
+                    },
+                  ),
+                  Infopage(
+                    text: "Log Out",
+                    icon: FontAwesomeIcons.signOut,
+                    press: () async {
+                      await auth.signOut();
+                      User? user = auth.currentUser;
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: ((context) => SignInScreen())));
+                    },
+                  ),
+                ],
+              ),
             );
           }
 

@@ -5,12 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:remove_h2o/Screens/aboutus_screen.dart';
 import 'package:remove_h2o/Screens/user_list/userList_body.dart';
-import 'package:remove_h2o/enum.dart';
 import 'package:remove_h2o/financescreen.dart';
 import 'package:remove_h2o/navigartion_drawer.dart';
 import 'package:remove_h2o/screen_buttons/reportEmergency_Screen.dart';
 import 'package:remove_h2o/screen_buttons/send_referral.dart';
-import 'package:remove_h2o/screen_buttons/take_photo.dart';
 import 'package:remove_h2o/size_config.dart';
 
 import 'home_menu.dart';
@@ -71,15 +69,15 @@ class _BodyState extends State<Body> {
                     MaterialPageRoute(builder: (context) => SendReferral()));
               },
             ),
-            SizedBox(height: 20),
-            HomeMenu(
-              text: "Send a Picture",
-              icon: FontAwesomeIcons.camera,
-              press: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PhotoData()));
-              },
-            ),
+            // SizedBox(height: 20),
+            // HomeMenu(
+            //   text: "Send a Picture",
+            //   icon: FontAwesomeIcons.camera,
+            //   press: () {
+            //     Navigator.push(context,
+            //         MaterialPageRoute(builder: (context) => PhotoData()));
+            //   },
+            // ),
             SizedBox(height: 20),
             HomeMenu(
               text: "User's List",

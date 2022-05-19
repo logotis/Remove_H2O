@@ -27,11 +27,10 @@ class ShareApp extends StatelessWidget {
                 appbarlogo,
                 height: getProportionateScreenHeight(270),
               )
-            : 
-        Image.asset(
-          "assets/images/logo.png",
-          height: getProportionateScreenHeight(270),
-        ),
+            : Image.asset(
+                "assets/images/logo.png",
+                height: getProportionateScreenHeight(270),
+              ),
       ),
       drawer: NavigationDrawer(),
       body: SingleChildScrollView(
@@ -45,8 +44,7 @@ class ShareApp extends StatelessWidget {
                 radius: 16,
                 child: IconButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Home()));
+                    Navigator.of(context).pop();
                   },
                   icon: Padding(
                     padding: const EdgeInsets.only(left: 2.0, bottom: 1),

@@ -1,9 +1,29 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:remove_h2o/size_config.dart';
 
-class Emailupgrade extends StatelessWidget {
+import '../vendor user/userapprovedbody.dart';
+
+class Emailupgrade extends StatefulWidget {
   const Emailupgrade({Key? key}) : super(key: key);
+
+  @override
+  State<Emailupgrade> createState() => _EmailupgradeState();
+}
+
+class _EmailupgradeState extends State<Emailupgrade> {
+
+  TextEditingController mailController = TextEditingController();
+  TextEditingController newmailController = TextEditingController();
+  void Updatemail() async {
+    await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(auth.currentUser!.uid)
+        .update({'email': newmailController.text.trim()});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,22 +81,24 @@ class Emailupgrade extends StatelessWidget {
             //     return (value != null && value.contains('@')) ? 'Do not use the @ char.' : null;
             //   },
             // )
-        TextFormField(
+      TextFormField(
+      controller: mailController,
       decoration: InputDecoration(
-        hintText: "Enter Previous Email",
-        floatingLabelBehavior: FloatingLabelBehavior.always,
+      hintText: "Enter Previous Email",
+      floatingLabelBehavior: FloatingLabelBehavior.always,
         // prefixIcon: Padding(
         //   padding: const EdgeInsets.only(left: 16.0),
         //   child: CustomIcon(svgIcon: "assets/icons/Lock.svg"),
         // ),
-        prefixIcon:  IconButton(
-          icon:FaIcon(FontAwesomeIcons.envelopeOpen,color: Color.fromARGB(255, 8, 8, 8),),
-          iconSize: 18,onPressed: null,
+      prefixIcon:  IconButton(
+      icon:FaIcon(FontAwesomeIcons.envelopeOpen,color: Color.fromARGB(255, 8, 8, 8),),
+      iconSize: 18,onPressed: null,
         ),
       ),
     ),
             SizedBox(height: 40,),
             TextFormField(
+              controller: newmailController,
               decoration: InputDecoration(
                 hintText: "Enter New Email",
                 floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -102,7 +124,7 @@ class Emailupgrade extends StatelessWidget {
                       borderRadius: BorderRadius.circular(32.0)),
                   minimumSize: Size(100, 40), //////// HERE
                 ),
-                onPressed: () {},
+                onPressed: Updatemail,
                 child: Text('Continue'),
               ),
             )

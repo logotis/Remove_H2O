@@ -1,9 +1,28 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:remove_h2o/size_config.dart';
+import 'package:remove_h2o/vendor%20user/userapprovedbody.dart';
 
-class Numberupgrade extends StatelessWidget {
+class Numberupgrade extends StatefulWidget {
   const Numberupgrade({Key? key}) : super(key: key);
+
+  @override
+  State<Numberupgrade> createState() => _NumberupgradeState();
+}
+
+class _NumberupgradeState extends State<Numberupgrade> {
+  TextEditingController numController = TextEditingController();
+  TextEditingController newnumController = TextEditingController();
+
+  void UpdateNumber()  {
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(auth.currentUser!.uid)
+        .update({'phoneNo': newnumController.text.trim()});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,22 +45,27 @@ class Numberupgrade extends StatelessWidget {
             height: getProportionateScreenHeight(270),
           ),
         ),
-        body:SingleChildScrollView(
-          padding: EdgeInsets.symmetric(vertical: 20,horizontal: 20),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CircleAvatar( backgroundColor: Colors.black,
+              CircleAvatar(
+                  backgroundColor: Colors.black,
                   radius: 16,
-                  child: IconButton(onPressed: (){
-                    Navigator.pop(context);},  icon: Padding(
-                    padding: const EdgeInsets.only(left: 2.0,bottom: 1),
-                    child: Icon(Icons.arrow_back_ios,size: 18),
-                  ),)),
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Padding(
+                      padding: const EdgeInsets.only(left: 2.0, bottom: 1),
+                      child: Icon(Icons.arrow_back_ios, size: 18),
+                    ),
+                  )),
               SizedBox(height: 55),
               Text('Change Number:',
-                  style:TextStyle(
+                  style: TextStyle(
                     color: Colors.black,
                     fontSize: getProportionateScreenWidth(28),
                     fontWeight: FontWeight.bold,
@@ -62,6 +86,7 @@ class Numberupgrade extends StatelessWidget {
               //   },
               // )
               TextFormField(
+                controller: numController,
                 decoration: InputDecoration(
                   hintText: "Enter Previous Number",
                   floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -69,14 +94,21 @@ class Numberupgrade extends StatelessWidget {
                   //   padding: const EdgeInsets.only(left: 16.0),
                   //   child: CustomIcon(svgIcon: "assets/icons/Lock.svg"),
                   // ),
-                  prefixIcon:  IconButton(
-                    icon:FaIcon(FontAwesomeIcons.phone,color: Color.fromARGB(255, 8, 8, 8),),
-                    iconSize: 18,onPressed: null,
+                  prefixIcon: IconButton(
+                    icon: FaIcon(
+                      FontAwesomeIcons.phone,
+                      color: Color.fromARGB(255, 8, 8, 8),
+                    ),
+                    iconSize: 18,
+                    onPressed: null,
                   ),
                 ),
               ),
-              SizedBox(height: 40.0,),
+              SizedBox(
+                height: 40.0,
+              ),
               TextFormField(
+                controller: newnumController,
                 decoration: InputDecoration(
                   hintText: "Enter New Number",
                   floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -84,13 +116,19 @@ class Numberupgrade extends StatelessWidget {
                   //   padding: const EdgeInsets.only(left: 16.0),
                   //   child: CustomIcon(svgIcon: "assets/icons/Lock.svg"),
                   // ),
-                  prefixIcon:  IconButton(
-                    icon:FaIcon(FontAwesomeIcons.phone,color: Color.fromARGB(255, 8, 8, 8),),
-                    iconSize: 18,onPressed: null,
+                  prefixIcon: IconButton(
+                    icon: FaIcon(
+                      FontAwesomeIcons.phone,
+                      color: Color.fromARGB(255, 8, 8, 8),
+                    ),
+                    iconSize: 18,
+                    onPressed: null,
                   ),
                 ),
               ),
-              SizedBox(height: 40.0,),
+              SizedBox(
+                height: 40.0,
+              ),
               Center(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -102,13 +140,12 @@ class Numberupgrade extends StatelessWidget {
                         borderRadius: BorderRadius.circular(32.0)),
                     minimumSize: Size(100, 40), //////// HERE
                   ),
-                  onPressed: () {},
+                  onPressed: UpdateNumber,
                   child: Text('Continue'),
                 ),
               )
             ],
           ),
-        )
-    );
+        ));
   }
 }

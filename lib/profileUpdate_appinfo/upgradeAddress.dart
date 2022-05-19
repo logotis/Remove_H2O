@@ -1,10 +1,26 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:remove_h2o/size_config.dart';
 
-class AddressUpgrade extends StatelessWidget {
+import '../vendor user/userapprovedbody.dart';
+
+class AddressUpgrade extends StatefulWidget {
   const AddressUpgrade({Key? key}) : super(key: key);
 
+  @override
+  State<AddressUpgrade> createState() => _AddressUpgradeState();
+}
+
+class _AddressUpgradeState extends State<AddressUpgrade> {
+  TextEditingController newadressController = TextEditingController();
+
+  void Updateadress()  {
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(auth.currentUser!.uid)
+        .update({'Adress': newadressController.text.trim()});
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +64,7 @@ class AddressUpgrade extends StatelessWidget {
                   )),
               SizedBox(height: 48),
               TextFormField(
+                controller: newadressController,
                 decoration: InputDecoration(
                   hintText: "Enter New Address",
                   floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -73,7 +90,7 @@ class AddressUpgrade extends StatelessWidget {
                         borderRadius: BorderRadius.circular(32.0)),
                     minimumSize: Size(100, 40), //////// HERE
                   ),
-                  onPressed: () {},
+                  onPressed: Updateadress,
                   child: Text('Continue'),
                 ),
               )

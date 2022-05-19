@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:remove_h2o/Screens/home/Home_screen.dart';
 import 'package:remove_h2o/navigartion_drawer.dart';
 import 'package:remove_h2o/size_config.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ReportEmergency extends StatefulWidget {
   const ReportEmergency({Key? key}) : super(key: key);
@@ -117,32 +118,58 @@ class ReportEMG extends StatelessWidget {
                                 Map<String, dynamic> data =
                                     document.data()! as Map<String, dynamic>;
 
-                                return Text(
-                                  data['phoneNo'],
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 55.0,
-                                      fontWeight: FontWeight.bold),
+                                return Column(
+                                  children: [
+                                    Text(
+                                      data['phoneNo'],
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 55.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 45.0,
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.blueAccent,
+                                        onPrimary: Colors.white,
+                                        shadowColor: Colors.blueAccent,
+                                        elevation: 3,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(32.0)),
+                                        minimumSize:
+                                            Size(100, 40), //////// HERE
+                                      ),
+                                      onPressed: () {
+                                        final _phonenumber = data['phoneNo'];
+                                        launchUrl(
+                                            Uri.parse('tel:$_phonenumber'));
+                                      },
+                                      child: Text('Call us'),
+                                    ),
+                                  ],
                                 );
                               }).toList());
                         },
                       ),
-                      SizedBox(
-                        height: 45.0,
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.blueAccent,
-                          onPrimary: Colors.white,
-                          shadowColor: Colors.blueAccent,
-                          elevation: 3,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(32.0)),
-                          minimumSize: Size(100, 40), //////// HERE
-                        ),
-                        onPressed: () {},
-                        child: Text('Call us'),
-                      )
+                      // SizedBox(
+                      //   height: 45.0,
+                      // ),
+                      // ElevatedButton(
+                      //   style: ElevatedButton.styleFrom(
+                      //     primary: Colors.blueAccent,
+                      //     onPrimary: Colors.white,
+                      //     shadowColor: Colors.blueAccent,
+                      //     elevation: 3,
+                      //     shape: RoundedRectangleBorder(
+                      //         borderRadius: BorderRadius.circular(32.0)),
+                      //     minimumSize: Size(100, 40), //////// HERE
+                      //   ),
+                      //   onPressed: () {},
+                      //   child: Text('Call us'),
+                      // )
                     ],
                   ),
                 ),
@@ -152,15 +179,15 @@ class ReportEMG extends StatelessWidget {
           Column(
             // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                'Did u mean?',
-                // textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: getProportionateScreenWidth(14),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              // Text(
+              //   'Did u mean?',
+              //   // textAlign: TextAlign.center,
+              //   style: TextStyle(
+              //     color: Colors.black,
+              //     fontSize: getProportionateScreenWidth(14),
+              //     fontWeight: FontWeight.bold,
+              //   ),
+              // ),
               SizedBox(
                 height: 60.0,
               ),

@@ -36,10 +36,8 @@ class _SignFormState extends State<SignForm> {
         emailcontroller.text.trim(),
         paswordcontroller.text.trim(),
       );
-    
     }
   }
-
 
   bool? remember = false;
   final List<String?> errors = [];
@@ -128,6 +126,7 @@ class _SignFormState extends State<SignForm> {
         return null;
       },
       controller: paswordcontroller,
+      obscureText: true,
       decoration: InputDecoration(
         labelText: "Password",
         hintText: "Enter your password",
