@@ -4,11 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:remove_h2o/size_config.dart';
-import 'package:remove_h2o/userlist_buttons/approved_usersAccess.dart';
 import 'package:remove_h2o/vendor%20user/useraprroved.dart';
+
 final auth = FirebaseAuth.instance;
+
 class Vendorapprrovedbody extends StatefulWidget {
-  
   const Vendorapprrovedbody({Key? key}) : super(key: key);
 
   @override
@@ -16,13 +16,9 @@ class Vendorapprrovedbody extends StatefulWidget {
 }
 
 class _ApprrovedbodyState extends State<Vendorapprrovedbody> {
-   
-  CollectionReference users = FirebaseFirestore.instance.collection('Users')
-  
-  ;
+  CollectionReference users = FirebaseFirestore.instance.collection('Users');
   final Stream<QuerySnapshot> usersStream = FirebaseFirestore.instance
       .collection('Users')
-    
       .where('role', isEqualTo: 3)
       .where('approved', isEqualTo: true)
       .snapshots();
@@ -83,7 +79,7 @@ class _ApprrovedbodyState extends State<Vendorapprrovedbody> {
             ),
             SizedBox(height: 10),
 
-           StreamBuilder<QuerySnapshot>(
+            StreamBuilder<QuerySnapshot>(
                 stream: usersStream,
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -105,40 +101,38 @@ class _ApprrovedbodyState extends State<Vendorapprrovedbody> {
                             document.data()! as Map<String, dynamic>;
                         print(Text(data['firstName']));
                         return VendorapprovedUsers(
-              // email: '',
-              // fname: "",
-              // lname: '',
-              // phoneNo: '',
-              text: data['firstName'],
-              // press: () => {
-              //   showDialog(
-              //     context: context,
-              //     builder: (_) => AlertDialog(
-              //       elevation: 24.0,
-              //       backgroundColor: Colors.white,
-              //       title: Text(data['firstName'].toString()),
-              //       content: Text("Do you want to give access"),
-              //       actions: <Widget>[
-              //         FlatButton(
-              //           child: Text("No"),
-              //           onPressed: () => Navigator.pop(context),
-              //         ),
-              //         FlatButton(
-              //           child: Text("Yes"),
-              //           onPressed: () => Navigator.pop(context),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // },
-            );
+                          // email: '',
+                          // fname: "",
+                          // lname: '',
+                          // phoneNo: '',
+                          text: data['firstName'],
+                          // press: () => {
+                          //   showDialog(
+                          //     context: context,
+                          //     builder: (_) => AlertDialog(
+                          //       elevation: 24.0,
+                          //       backgroundColor: Colors.white,
+                          //       title: Text(data['firstName'].toString()),
+                          //       content: Text("Do you want to give access"),
+                          //       actions: <Widget>[
+                          //         FlatButton(
+                          //           child: Text("No"),
+                          //           onPressed: () => Navigator.pop(context),
+                          //         ),
+                          //         FlatButton(
+                          //           child: Text("Yes"),
+                          //           onPressed: () => Navigator.pop(context),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // },
+                        );
                       }).toList());
                   //     return Text('nodata');
                   //   }),
                   // );
                 }),
-
-
 
             // ApprovedUsers(
             //   // email: '',

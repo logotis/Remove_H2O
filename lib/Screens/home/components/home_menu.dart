@@ -30,10 +30,15 @@ class HomeMenu extends StatelessWidget {
         ),
         onPressed: press,
         child: Row(
-          children: [ IconButton(
-            icon:FaIcon(icon,color: Color.fromARGB(255, 8, 8, 8),),
-            iconSize: 40,onPressed: null,
-          ),
+          children: [
+            IconButton(
+              icon: FaIcon(
+                icon,
+                color: Color.fromARGB(255, 8, 8, 8),
+              ),
+              iconSize: 40,
+              onPressed: null,
+            ),
             // SvgPicture.asset(
             //   icon,
             //   color: Color.fromARGB(255, 8, 8, 8),
@@ -42,7 +47,7 @@ class HomeMenu extends StatelessWidget {
             // ),
             SizedBox(width: 20),
             Expanded(child: Text(text)),
-           // Icon(Icons.arrow_forward_ios),
+            // Icon(Icons.arrow_forward_ios),
           ],
         ),
       ),

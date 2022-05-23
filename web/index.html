@@ -29,7 +29,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>remove_h2o</title>
+  <title>Remove H2O</title>
   <link rel="manifest" href="manifest.json">
 
   <script>
@@ -53,6 +53,25 @@
         return appRunner.runApp();
       });
     });
+  </script>
+
+  <script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-analytics.js"></script>
+
+  <script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBZUe4jJe_zjtNVeidyYSezQAYKPuVGVoA",
+    authDomain: "removeh2o-360.firebaseapp.com",
+    projectId: "removeh2o-360",
+    storageBucket: "removeh2o-360.appspot.com",
+    messagingSenderId: "663029016523",
+    appId: "1:663029016523:web:b0b77f7ff5accb66be384e",
+    measurementId: "G-HCK34QYFZZ"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
   </script>
 </body>
 </html>

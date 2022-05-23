@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:remove_h2o/leadgenerationscreen.dart';
-import 'package:remove_h2o/screen_buttons/take_photo.dart';
 import 'package:remove_h2o/size_config.dart';
 
 class Leadgenerationbody extends StatelessWidget {

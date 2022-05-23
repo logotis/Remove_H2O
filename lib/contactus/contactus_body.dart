@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:remove_h2o/Screens/aboutus_screen.dart';
-import 'package:remove_h2o/Screens/home/Home_screen.dart';
 import 'package:remove_h2o/contactus/contactus_screen.dart';
 import 'package:remove_h2o/navigartion_drawer.dart';
 import 'package:remove_h2o/size_config.dart';

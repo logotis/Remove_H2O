@@ -17,7 +17,7 @@ class _NumberupgradeState extends State<Numberupgrade> {
   TextEditingController numController = TextEditingController();
   TextEditingController newnumController = TextEditingController();
 
-  void UpdateNumber()  {
+  void UpdateNumber() {
     FirebaseFirestore.instance
         .collection('Users')
         .doc(auth.currentUser!.uid)

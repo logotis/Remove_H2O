@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:remove_h2o/Screens/aboutus_screen.dart';
 import 'package:remove_h2o/size_config.dart';
 
 class MyHeaderDrawer extends StatefulWidget {

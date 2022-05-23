@@ -15,7 +15,7 @@ class Apprrovedbody extends StatefulWidget {
 }
 
 class _ApprrovedbodyState extends State<Apprrovedbody> {
-   final auth = FirebaseAuth.instance;
+  final auth = FirebaseAuth.instance;
   CollectionReference users = FirebaseFirestore.instance.collection('Users');
   final Stream<QuerySnapshot> usersStream = FirebaseFirestore.instance
       .collection('Users')
@@ -94,7 +94,7 @@ class _ApprrovedbodyState extends State<Apprrovedbody> {
             ),
             SizedBox(height: 10),
 
-           StreamBuilder<QuerySnapshot>(
+            StreamBuilder<QuerySnapshot>(
                 stream: usersStream,
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -116,40 +116,38 @@ class _ApprrovedbodyState extends State<Apprrovedbody> {
                             document.data()! as Map<String, dynamic>;
                         print(Text(data['firstName']));
                         return ApprovedUsers(
-              // email: '',
-              // fname: "",
-              // lname: '',
-              // phoneNo: '',
-              text: data['firstName'],
-              // press: () => {
-              //   showDialog(
-              //     context: context,
-              //     builder: (_) => AlertDialog(
-              //       elevation: 24.0,
-              //       backgroundColor: Colors.white,
-              //       title: Text(data['firstName'].toString()),
-              //       content: Text("Do you want to give access"),
-              //       actions: <Widget>[
-              //         FlatButton(
-              //           child: Text("No"),
-              //           onPressed: () => Navigator.pop(context),
-              //         ),
-              //         FlatButton(
-              //           child: Text("Yes"),
-              //           onPressed: () => Navigator.pop(context),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // },
-            );
+                          // email: '',
+                          // fname: "",
+                          // lname: '',
+                          // phoneNo: '',
+                          text: data['firstName'],
+                          // press: () => {
+                          //   showDialog(
+                          //     context: context,
+                          //     builder: (_) => AlertDialog(
+                          //       elevation: 24.0,
+                          //       backgroundColor: Colors.white,
+                          //       title: Text(data['firstName'].toString()),
+                          //       content: Text("Do you want to give access"),
+                          //       actions: <Widget>[
+                          //         FlatButton(
+                          //           child: Text("No"),
+                          //           onPressed: () => Navigator.pop(context),
+                          //         ),
+                          //         FlatButton(
+                          //           child: Text("Yes"),
+                          //           onPressed: () => Navigator.pop(context),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // },
+                        );
                       }).toList());
                   //     return Text('nodata');
                   //   }),
                   // );
                 }),
-
-
 
             // ApprovedUsers(
             //   // email: '',

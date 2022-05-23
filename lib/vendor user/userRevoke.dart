@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class VendorRevokeuser extends StatelessWidget {
-  const VendorRevokeuser({Key? key, required this.text,})
-      : super(key: key);
+  const VendorRevokeuser({
+    Key? key,
+    required this.text,
+  }) : super(key: key);
   final String text;
   // final VoidCallback? press;
   @override
@@ -18,7 +20,7 @@ class VendorRevokeuser extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           backgroundColor: Colors.grey[200],
         ),
-        onPressed: (){},
+        onPressed: () {},
         child: Row(
           children: [
             // IconButton(

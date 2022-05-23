@@ -1,12 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:remove_h2o/Screens/sign_up/components/sign_up_form.dart';
 import 'package:remove_h2o/constants.dart';
 import 'package:remove_h2o/enum.dart';
 import 'package:remove_h2o/vendor%20user%20signup/components/user_signupform.dart';
+
 import '../../size_config.dart';
 
 class UserSignUpScreen extends StatefulWidget {

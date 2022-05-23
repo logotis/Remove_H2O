@@ -1,14 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:remove_h2o/Screens/aboutus_screen.dart';
-import 'package:remove_h2o/Screens/home/components/body.dart';
-import 'package:remove_h2o/Screens/share_app.dart';
-import 'package:remove_h2o/components/my_drawer_header.dart';
-import 'package:remove_h2o/contactus/contactus_body.dart';
-import 'package:remove_h2o/myInfo_screen/myInfo_Body.dart';
-import 'package:remove_h2o/size_config.dart';
-import 'package:remove_h2o/sphome/component/sp_body.dart';
 import 'package:remove_h2o/ushome/components/us_body.dart';
 
 class USHome extends StatefulWidget {

@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:remove_h2o/Screens/home/Home_screen.dart';
 import 'package:remove_h2o/navigartion_drawer.dart';
 import 'package:remove_h2o/size_config.dart';
 import 'package:url_launcher/url_launcher.dart';

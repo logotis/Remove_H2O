@@ -2,11 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:remove_h2o/Screens/forgot_password/forgot_password_screen.dart';
-import 'package:remove_h2o/Screens/home/Home_screen.dart';
 import 'package:remove_h2o/components/custom_surfix_icon.dart';
 import 'package:remove_h2o/components/embosed%20button.dart';
 import 'package:remove_h2o/components/form_error.dart';
-import 'package:remove_h2o/helper/keyboard.dart';
 
 import '../../../size_config.dart';
 
@@ -26,6 +24,7 @@ class _SignFormState extends State<SignForm> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController paswordcontroller = TextEditingController();
+  bool remember = false;
 
   void trySubmit() {
     final isValid = _formKey.currentState!.validate();
@@ -39,7 +38,6 @@ class _SignFormState extends State<SignForm> {
     }
   }
 
-  bool? remember = false;
   final List<String?> errors = [];
 
   void addError({String? error}) {
@@ -73,7 +71,9 @@ class _SignFormState extends State<SignForm> {
                 activeColor: Colors.red,
                 onChanged: (value) {
                   setState(() {
-                    remember = value;
+                    remember = value!;
+                    remember = remember;
+                    print(remember);
                   });
                 },
               ),

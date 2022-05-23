@@ -17,7 +17,6 @@ class _RevokeuserBodyState extends State<RevokeuserBody> {
   final Stream<QuerySnapshot> usersStream = FirebaseFirestore.instance
       .collection('Users')
       .where('role', isEqualTo: 2)
-      
       .where('deleted', isEqualTo: true)
       .snapshots();
   @override

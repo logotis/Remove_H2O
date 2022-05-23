@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class VendorapprovedUsers extends StatelessWidget {
-  const VendorapprovedUsers({Key? key, required this.text})
-      : super(key: key);
+  const VendorapprovedUsers({Key? key, required this.text}) : super(key: key);
   final String text;
   // final VoidCallback? press;
   @override
@@ -18,7 +17,7 @@ class VendorapprovedUsers extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           backgroundColor: Colors.grey[200],
         ),
-        onPressed: (){},
+        onPressed: () {},
         child: Row(
           children: [
             // IconButton(

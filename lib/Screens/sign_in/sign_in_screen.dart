@@ -3,15 +3,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:remove_h2o/Screens/aboutus_screen.dart';
 import 'package:remove_h2o/Screens/home/Home_screen.dart';
 import 'package:remove_h2o/Screens/sign_in/components/sign_form.dart';
+import 'package:remove_h2o/Screens/sign_up/sign_up_screen.dart';
 import 'package:remove_h2o/components/no_account_text.dart';
 import 'package:remove_h2o/components/socal_card.dart';
 import 'package:remove_h2o/enum.dart';
-import 'package:remove_h2o/screen_buttons/reportEmergency_Screen.dart';
-import 'package:remove_h2o/screen_buttons/send_referral.dart';
 import 'package:remove_h2o/size_config.dart';
 import 'package:remove_h2o/sphome/sphome.dart';
 import 'package:remove_h2o/ushome/ushome.dart';
@@ -50,7 +49,6 @@ class _SignInScreenState extends State<SignInScreen> {
 
           if (doc["approved"] != true) {
             Text('User is pending verification');
-            
           } else {
             if (doc['role'] == Roles.superadmin) {
               Navigator.push(
@@ -59,8 +57,8 @@ class _SignInScreenState extends State<SignInScreen> {
               Navigator.push(
                   context, MaterialPageRoute(builder: (_) => SPHome()));
             } else if (doc['role'] == Roles.vendor) {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => Home()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => Home()));
             } else if (doc['role'] == Roles.user) {
               Navigator.push(
                   context, MaterialPageRoute(builder: (_) => USHome()));
@@ -68,8 +66,15 @@ class _SignInScreenState extends State<SignInScreen> {
           }
         });
       });
-    } on FirebaseAuthException catch (err) {
-      print(err);
+    } on FirebaseAuthException catch (exception) {
+      print(exception);
+      Fluttertoast.showToast(
+          msg: exception.toString(),
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.SNACKBAR,
+          backgroundColor: Colors.blue,
+          textColor: Colors.white,
+          fontSize: 16.0);
     }
   }
 
@@ -98,7 +103,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
 //           if (doc["approved"] != true) {
 //             Text('User is pending verification');
-            
+
 //           } else {
 //             if (doc['role'] == Roles.superadmin) {
 //               Navigator.push(
@@ -121,12 +126,10 @@ class _SignInScreenState extends State<SignInScreen> {
 //     }
 //   }
 
-
-
   Future<void> controlSign() async {
-    this.setState(() {
-      isLoading = true;
-    });
+    // this.setState(() {
+    //   isLoading = true;
+    // });
     GoogleSignInAccount? googleUser = await googleSignIn.signIn();
     GoogleSignInAuthentication googleAuthentication =
         await googleUser!.authentication;
@@ -134,6 +137,10 @@ class _SignInScreenState extends State<SignInScreen> {
         idToken: googleAuthentication.idToken,
         accessToken: googleAuthentication.accessToken);
     User? firebaseUser = (await auth.signInWithCredential(credential)).user;
+    if (firebaseUser != null) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => SignUpScreen()));
+    }
     //sign In Success
     // if (firebaseUser != null) {
     //   //check if already sign up
@@ -229,9 +236,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: SizeConfig.screenHeight * 0.08),
-                  SignForm(
-                  _signInauthform
-                  ),
+                  SignForm(_signInauthform),
                   SizedBox(height: SizeConfig.screenHeight * 0.08),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

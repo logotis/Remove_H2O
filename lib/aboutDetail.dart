@@ -1,15 +1,16 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:remove_h2o/navigartion_drawer.dart';
 import 'package:remove_h2o/size_config.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:remove_h2o/vendor%20user/userapprovedbody.dart';
 
 class AboutDetail extends StatefulWidget {

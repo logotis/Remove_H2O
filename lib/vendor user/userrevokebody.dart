@@ -4,9 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:remove_h2o/size_config.dart';
-import 'package:remove_h2o/userlist_buttons/revoke_users.dart';
 import 'package:remove_h2o/vendor%20user/userRevoke.dart';
+
 final auth = FirebaseAuth.instance;
+
 class VendorrevokeuserBody extends StatefulWidget {
   const VendorrevokeuserBody({Key? key}) : super(key: key);
 
@@ -15,9 +16,10 @@ class VendorrevokeuserBody extends StatefulWidget {
 }
 
 class _RevokeuserBodyState extends State<VendorrevokeuserBody> {
-   CollectionReference users = FirebaseFirestore.instance.collection('Users')
-  .doc(auth.currentUser!.uid).collection('Vendoruser')
-  ;
+  CollectionReference users = FirebaseFirestore.instance
+      .collection('Users')
+      .doc(auth.currentUser!.uid)
+      .collection('Vendoruser');
   final Stream<QuerySnapshot> usersStream = FirebaseFirestore.instance
       .collection('Users')
       .where('role', isEqualTo: 3)

@@ -15,12 +15,13 @@ class AddressUpgrade extends StatefulWidget {
 class _AddressUpgradeState extends State<AddressUpgrade> {
   TextEditingController newadressController = TextEditingController();
 
-  void Updateadress()  {
+  void Updateadress() {
     FirebaseFirestore.instance
         .collection('Users')
         .doc(auth.currentUser!.uid)
         .update({'Adress': newadressController.text.trim()});
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,22 +43,27 @@ class _AddressUpgradeState extends State<AddressUpgrade> {
             height: getProportionateScreenHeight(270),
           ),
         ),
-        body:SingleChildScrollView(
-          padding: EdgeInsets.symmetric(vertical: 20,horizontal: 20),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CircleAvatar( backgroundColor: Colors.black,
+              CircleAvatar(
+                  backgroundColor: Colors.black,
                   radius: 16,
-                  child: IconButton(onPressed: (){
-                    Navigator.pop(context);},  icon: Padding(
-                    padding: const EdgeInsets.only(left: 2.0,bottom: 1),
-                    child: Icon(Icons.arrow_back_ios,size: 18),
-                  ),)),
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Padding(
+                      padding: const EdgeInsets.only(left: 2.0, bottom: 1),
+                      child: Icon(Icons.arrow_back_ios, size: 18),
+                    ),
+                  )),
               SizedBox(height: 55),
               Text('Change Address:',
-                  style:TextStyle(
+                  style: TextStyle(
                     color: Colors.black,
                     fontSize: getProportionateScreenWidth(28),
                     fontWeight: FontWeight.bold,
@@ -72,13 +78,19 @@ class _AddressUpgradeState extends State<AddressUpgrade> {
                   //   padding: const EdgeInsets.only(left: 16.0),
                   //   child: CustomIcon(svgIcon: "assets/icons/Lock.svg"),
                   // ),
-                  prefixIcon:  IconButton(
-                    icon:FaIcon(FontAwesomeIcons.mapLocationDot,color: Color.fromARGB(255, 8, 8, 8),),
-                    iconSize: 18,onPressed: null,
+                  prefixIcon: IconButton(
+                    icon: FaIcon(
+                      FontAwesomeIcons.mapLocationDot,
+                      color: Color.fromARGB(255, 8, 8, 8),
+                    ),
+                    iconSize: 18,
+                    onPressed: null,
                   ),
                 ),
               ),
-              SizedBox(height: 40,),
+              SizedBox(
+                height: 40,
+              ),
               Center(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -96,7 +108,6 @@ class _AddressUpgradeState extends State<AddressUpgrade> {
               )
             ],
           ),
-        )
-    );
+        ));
   }
 }

@@ -30,8 +30,7 @@ class _PendingAccess_bodyState extends State<PendingAccess_body> {
         .where('docId', isEqualTo: docId)
         .get()
         .then((value) => value.docs.forEach((element) {
-              element.reference.update({
-                "approved": true, 'suapproved': true});
+              element.reference.update({"approved": true, 'suapproved': true});
             }));
   }
 

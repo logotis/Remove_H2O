@@ -1,11 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:remove_h2o/Screens/sign_up/components/sign_up_form.dart';
 import 'package:remove_h2o/constants.dart';
 import 'package:remove_h2o/enum.dart';
+
 import '../../size_config.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -29,21 +30,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
     try {
       userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      DocumentReference ref = firestore.collection('Users').doc(auth.currentUser!.uid);
+      DocumentReference ref =
+          firestore.collection('Users').doc(auth.currentUser!.uid);
       await ref.set({
         'docId': ref.id,
-        'email':email,
+        'email': email,
         'role': Roles.vendor,
-        'approved':false,
-        'suapproved':false,
-        'deleted':false,
-        'firstName':fname,
-        'isEmailVerified':false,
-        'Adress':lname,  
-        'phoneNo':phoneNo,
-        'password':password,
+        'approved': false,
+        'suapproved': false,
+        'deleted': false,
+        'firstName': fname,
+        'isEmailVerified': false,
+        'Adress': lname,
+        'phoneNo': phoneNo,
+        'password': password,
       });
-
     } on FirebaseAuthException catch (err) {
       print(err);
     }
@@ -70,17 +71,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CircleAvatar(
-                      backgroundColor: Colors.black,
-                      radius: 16,
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Padding(
-                          padding: const EdgeInsets.only(left: 2.0, bottom: 1),
-                          child: Icon(Icons.arrow_back_ios, size: 18),
-                        ),
-                      ),),
+                    backgroundColor: Colors.black,
+                    radius: 16,
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Padding(
+                        padding: const EdgeInsets.only(left: 2.0, bottom: 1),
+                        child: Icon(Icons.arrow_back_ios, size: 18),
+                      ),
+                    ),
+                  ),
                   Column(
                     children: [
                       // SizedBox(height: SizeConfig.screenHeight * 0.04), // 4%

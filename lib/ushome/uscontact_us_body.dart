@@ -3,9 +3,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:remove_h2o/Screens/aboutus_screen.dart';
-import 'package:remove_h2o/Screens/home/Home_screen.dart';
-import 'package:remove_h2o/contactus/contactus_screen.dart';
 import 'package:remove_h2o/navigartion_drawer.dart';
 import 'package:remove_h2o/size_config.dart';
 import 'package:remove_h2o/ushome/uscontact_us.dart';
@@ -23,10 +20,10 @@ class UserContactusBody extends StatelessWidget {
         backgroundColor: Colors.white,
         brightness: Brightness.light,
         centerTitle: true,
-        title:  Image.asset(
-                "assets/images/logo.png",
-                height: getProportionateScreenHeight(270),
-              ),
+        title: Image.asset(
+          "assets/images/logo.png",
+          height: getProportionateScreenHeight(270),
+        ),
       ),
       drawer: NavigationDrawer(),
       body: SingleChildScrollView(
@@ -56,8 +53,8 @@ class UserContactusBody extends StatelessWidget {
                 )),
             SizedBox(height: 20),
             StreamBuilder(
-              stream:
-                  FirebaseFirestore.instance.collection('Users')
+              stream: FirebaseFirestore.instance
+                  .collection('Users')
                   .where('docId', isEqualTo: auth.currentUser!.uid)
                   .snapshots(),
               builder: (BuildContext context,

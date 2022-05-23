@@ -5,10 +5,12 @@ class userctspage extends StatelessWidget {
   final String text;
   final IconData icon;
   final VoidCallback? press;
-  const userctspage({Key? key,
+  const userctspage({
+    Key? key,
     required this.text,
     required this.icon,
-    this.press,}) : super(key: key);
+    this.press,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +25,20 @@ class userctspage extends StatelessWidget {
               primary: Colors.black,
               padding: EdgeInsets.all(30),
               textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
               backgroundColor: Colors.grey[200],
             ),
             onPressed: press,
             child: Row(
               children: [
                 IconButton(
-                    icon:FaIcon(icon,color: Color.fromARGB(255, 8, 8, 8),),
-                   iconSize: 30,onPressed: null,
+                  icon: FaIcon(
+                    icon,
+                    color: Color.fromARGB(255, 8, 8, 8),
+                  ),
+                  iconSize: 30,
+                  onPressed: null,
                 ),
                 SizedBox(width: 20),
                 Expanded(child: Text(text)),
@@ -41,7 +47,7 @@ class userctspage extends StatelessWidget {
             ),
           ),
         ),
-    ],
+      ],
     );
   }
 }

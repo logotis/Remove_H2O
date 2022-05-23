@@ -5,19 +5,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:remove_h2o/size_config.dart';
-import 'package:remove_h2o/userlist_buttons/pending_access.dart';
 import 'package:remove_h2o/vendor%20user/userpending.dart';
-  final auth = FirebaseAuth.instance;
+
+final auth = FirebaseAuth.instance;
+
 class VendorpendingAccess_body extends StatefulWidget {
   @override
   State<VendorpendingAccess_body> createState() => _PendingAccess_bodyState();
 }
 
 class _PendingAccess_bodyState extends State<VendorpendingAccess_body> {
-
- CollectionReference users = FirebaseFirestore.instance.collection('Users')
-  
-  ;
+  CollectionReference users = FirebaseFirestore.instance.collection('Users');
   final Stream<QuerySnapshot> usersStream = FirebaseFirestore.instance
       .collection('User')
       .where('role', isEqualTo: 3)

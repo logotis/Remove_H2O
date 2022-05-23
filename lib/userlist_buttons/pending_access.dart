@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class PendingAccess extends StatefulWidget {
@@ -10,14 +9,14 @@ class PendingAccess extends StatefulWidget {
     // this.fname,
     // this.lname,
     // this.phoneNo,
-   required this.text,
+    required this.text,
   });
 
   // dynamic email;
   // dynamic fname;
   // dynamic lname;
   // dynamic phoneNo;
-var text;
+  var text;
   VoidCallback? press;
 
   @override
@@ -57,7 +56,7 @@ class _PendingAccessState extends State<PendingAccess> {
             //       child: Image.asset("assets/images/Profile Image.png"),
             //     )),
             // SizedBox(width: 20),
-            Expanded(child: Text(widget.text) ),
+            Expanded(child: Text(widget.text)),
             // Icon(Icons.arrow_forward_ios),
           ],
         ),

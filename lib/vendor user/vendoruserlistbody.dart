@@ -2,12 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:remove_h2o/Screens/sign_up/sign_up_screen.dart';
 import 'package:remove_h2o/Screens/user_list/users_list.dart';
 import 'package:remove_h2o/size_config.dart';
-import 'package:remove_h2o/userlist_buttons/approved_usersBody.dart';
-import 'package:remove_h2o/userlist_buttons/pendingAccess_body.dart';
-import 'package:remove_h2o/userlist_buttons/revoke_usersbody.dart';
 import 'package:remove_h2o/vendor%20user%20signup/user_signup.dart';
 import 'package:remove_h2o/vendor%20user/userapprovedbody.dart';
 import 'package:remove_h2o/vendor%20user/userpendingbody.dart';
@@ -82,8 +78,10 @@ class _userlistbodyState extends State<Vendoruserlistbody> {
               text: "Approved User's",
               icon: FontAwesomeIcons.users,
               press: () => {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Vendorapprrovedbody()))
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Vendorapprrovedbody()))
               },
             ),
             SizedBox(height: 20),
@@ -91,8 +89,10 @@ class _userlistbodyState extends State<Vendoruserlistbody> {
               text: "Revoke Access",
               icon: FontAwesomeIcons.refresh,
               press: () => {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => VendorrevokeuserBody()))
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => VendorrevokeuserBody()))
               },
             ),
           ],
@@ -101,7 +101,8 @@ class _userlistbodyState extends State<Vendoruserlistbody> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            Navigator.push(context, MaterialPageRoute(builder: (_)=>UserSignUpScreen()));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => UserSignUpScreen()));
           });
         },
         child: Icon(Icons.add),

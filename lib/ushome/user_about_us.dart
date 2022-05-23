@@ -1,15 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:remove_h2o/Screens/home/Home_screen.dart';
-import 'package:remove_h2o/aboutDetail.dart';
 import 'package:remove_h2o/navigartion_drawer.dart';
 import 'package:remove_h2o/size_config.dart';
-import 'package:flutter/material.dart';
-
-import '../vendor user/userapprovedbody.dart';
 
 // String appbarlogo = '';
 // String workvendor = '';
@@ -55,10 +48,10 @@ class _abtpageState extends State<userabtpage> {
         backgroundColor: Colors.white,
         brightness: Brightness.light,
         centerTitle: true,
-        title:  Image.asset(
-                "assets/images/logo.png",
-                height: getProportionateScreenHeight(270),
-              ),
+        title: Image.asset(
+          "assets/images/logo.png",
+          height: getProportionateScreenHeight(270),
+        ),
         // title: Text(appbarlogo.toString(), style: TextStyle(color: Colors.amber),),
         // title: appbartitle.isEmpty"assets/images/logo.png",
         //   height: getProportionateScreenHeight(270),
@@ -99,53 +92,53 @@ class _abtpageState extends State<userabtpage> {
                 ),
               ),
               // imagevendor.isEmpty
-              //     ? 
-                  Container(
-                      height: 200.0,
-                      width: 320.0,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/ambulance.jpg'),
-                          fit: BoxFit.fill,
-                        ),
-                        shape: BoxShape.rectangle,
-                      ),
-                    ),
-                  // : Container(
-                  //     height: 200.0,
-                  //     width: 320.0,
-                  //     decoration: BoxDecoration(
-                  //       image: DecorationImage(
-                  //         image: NetworkImage(imagevendor),
-                  //         fit: BoxFit.fill,
-                  //       ),
-                  //       shape: BoxShape.rectangle,
-                  //     ),
-                  //   ),
+              //     ?
+              Container(
+                height: 200.0,
+                width: 320.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/ambulance.jpg'),
+                    fit: BoxFit.fill,
+                  ),
+                  shape: BoxShape.rectangle,
+                ),
+              ),
+              // : Container(
+              //     height: 200.0,
+              //     width: 320.0,
+              //     decoration: BoxDecoration(
+              //       image: DecorationImage(
+              //         image: NetworkImage(imagevendor),
+              //         fit: BoxFit.fill,
+              //       ),
+              //       shape: BoxShape.rectangle,
+              //     ),
+              //   ),
               // workvendor.isEmpty
-              //     ? 
-                  RichText(
-                      text: TextSpan(
-                        style: TextStyle(color: Colors.black, fontSize: 16),
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: <TextSpan>[
-                          //TextSpan(text: '', style: TextStyle(color: Colors.blue)),
-                          TextSpan(
-                              text:
-                                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently  desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum'),
-                        ],
-                      ),
-                    )
-                  // : RichText(
-                  //     text: TextSpan(
-                  //       style: TextStyle(color: Colors.black, fontSize: 16),
-                  //       // ignore: prefer_const_literals_to_create_immutables
-                  //       children: <TextSpan>[
-                  //         //TextSpan(text: '', style: TextStyle(color: Colors.blue)),
-                  //         TextSpan(text: workvendor),
-                  //       ],
-                  //     ),
-                  //   )
+              //     ?
+              RichText(
+                text: TextSpan(
+                  style: TextStyle(color: Colors.black, fontSize: 16),
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: <TextSpan>[
+                    //TextSpan(text: '', style: TextStyle(color: Colors.blue)),
+                    TextSpan(
+                        text:
+                            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently  desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum'),
+                  ],
+                ),
+              )
+              // : RichText(
+              //     text: TextSpan(
+              //       style: TextStyle(color: Colors.black, fontSize: 16),
+              //       // ignore: prefer_const_literals_to_create_immutables
+              //       children: <TextSpan>[
+              //         //TextSpan(text: '', style: TextStyle(color: Colors.blue)),
+              //         TextSpan(text: workvendor),
+              //       ],
+              //     ),
+              //   )
             ],
           ),
         ),
