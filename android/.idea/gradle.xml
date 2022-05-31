@@ -26,7 +26,6 @@
             <option value="E:/Android/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_android-6.0.17/android" />
           </set>
         </option>
-        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>
