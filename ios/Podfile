@@ -1,4 +1,4 @@
-ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+ ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
  project 'Runner', {
 

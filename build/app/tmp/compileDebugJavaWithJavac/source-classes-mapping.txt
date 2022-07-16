@@ -1,0 +1,4 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/example/remove_h2o/BuildConfig.java
+ com.example.remove_h2o.BuildConfig
