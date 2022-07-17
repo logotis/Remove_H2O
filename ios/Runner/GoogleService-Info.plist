@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>663029016523-u6m3lsi6ohkb62cujjv8dkr3tcie4s3j.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.663029016523-u6m3lsi6ohkb62cujjv8dkr3tcie4s3j</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>663029016523-me7nsk1bg1r7u3frnj167no402bk77vo.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDI7G6Jb0wv-i4aAnzFQ2jxjXkT3onz410</string>
+	<key>GCM_SENDER_ID</key>
+	<string>663029016523</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.logotis.h2oremove</string>
+	<key>PROJECT_ID</key>
+	<string>removeh2o-360</string>
+	<key>STORAGE_BUCKET</key>
+	<string>removeh2o-360.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:663029016523:ios:24b36c409b97f239be384e</string>
+</dict>
+</plist>
