@@ -1,12 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:remove_h2o/mobile/size_config.dart';
 import 'package:remove_h2o/mobile/ushome/user_nav_drawer.dart';
 
-// String appbarlogo = '';
-// String workvendor = '';
-// String imagevendor = '';
+String appbarlogo = '';
+String workvendor = '';
+String imagevendor = '';
 
 class userabtpage extends StatefulWidget {
   @override
@@ -14,28 +16,30 @@ class userabtpage extends StatefulWidget {
 }
 
 class _abtpageState extends State<userabtpage> {
-  // void getdata() {
-  //   FirebaseFirestore.instance
-  //       .collection('Vendor Data')
-  //       .where('docId', isEqualTo: auth.currentUser!.uid)
-  //       .get()
-  //       .then((QuerySnapshot querySnapshot) {
-  //     querySnapshot.docs.forEach((doc) {
-  //       setState(() {
-  //         // print(doc['workadress']);
-  //         appbarlogo = doc['logo'];
-  //         workvendor = doc['workadress'];
-  //         imagevendor = doc['imageUrl'];
-  //       });
-  //     });
-  //   });
-  // }
+  final auth = FirebaseAuth.instance;
+  void getdata() {
+    FirebaseFirestore.instance
+        .collection('Vendor Data')
+        // .where('vendorDocId', isEqualTo: )
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        setState(() {
+          // print(doc['workadress']);
+          appbarlogo = doc['logo'];
+          workvendor = doc['workadress'];
+          imagevendor = doc['imageUrl'];
+          print(workvendor);
+        });
+      });
+    });
+  }
 
-  // @override
-  // void initState() {
-  //   getdata();
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    getdata();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -18,7 +18,6 @@ import 'package:remove_h2o/mobile/vendor_user/userapprovedbody.dart';
 class AboutDetail extends StatefulWidget {
   String image;
   AboutDetail({required this.image});
-
   @override
   State<AboutDetail> createState() => _AboutDetailState();
 }
@@ -29,9 +28,13 @@ class _AboutDetailState extends State<AboutDetail> {
   firebase_storage.Reference imageRef = firebase_storage
       .FirebaseStorage.instance
       .ref('Images / ${DateTime.now()}');
+  firebase_storage.Reference logoRefernce = firebase_storage
+      .FirebaseStorage.instance
+      .ref('logoImage / ${DateTime.now()}');
   TextEditingController workadresscontroller = TextEditingController();
   File? _image;
-  File? _logo;
+  File? _logoGallery;
+
   ///code for update company IMAGE
   Future getImage() async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -42,17 +45,18 @@ class _AboutDetailState extends State<AboutDetail> {
       });
     }
   }
+
   ///code for company logo get image from camera
-  Future getLogo() async {
-    final image = await ImagePicker().pickImage(source: ImageSource.camera);
-    // final image = await ImagePicker().pickImage(source: ImageSource.gallery);/
-    if (image != null) {
-      final imageTem = File(image.path);
-      setState(() {
-        _logo = imageTem;
-      });
-    }
-  }
+  // Future getLogo() async {
+  //   final image = await ImagePicker().pickImage(source: ImageSource.camera);
+  //   // final image = await ImagePicker().pickImage(source: ImageSource.gallery);/
+  //   if (image != null) {
+  //     final imageTem = File(image.path);
+  //     setState(() {
+  //       _logoCamera = imageTem;
+  //     });
+  //   }
+  // }
   ///code for company logo get image from gallery
   Future getGallery() async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -60,7 +64,7 @@ class _AboutDetailState extends State<AboutDetail> {
     if (image != null) {
       final imageTem = File(image.path);
       setState(() {
-        _logo = imageTem;
+        _logoGallery = imageTem;
       });
     }
   }
@@ -74,26 +78,35 @@ class _AboutDetailState extends State<AboutDetail> {
   // }
 
   Future submitData() async {
+    flutterToast(
+        msg: "Data is being updating...",
+        bgColor: Colors.green,
+        toastLength: Toast.LENGTH_SHORT);
     final isValid = _formKey.currentState!.validate();
     if (isValid) {
       _formKey.currentState!.save();
       workadresscontroller.text.trim();
-      UploadTask uploadTask = imageRef.putFile(_image!);
+
+      ///code for company logo url
+      UploadTask uploadTask = imageRef.putFile(_logoGallery!);
       await Future.value(uploadTask);
-      var imageUrl = await imageRef.getDownloadURL();
-      UploadTask uploadTask1 = imageRef.putFile(_logo!);
-      await Future.value(uploadTask);
-      var imageUrl1 = await imageRef.getDownloadURL();
+      var logoUrl = await imageRef.getDownloadURL();
+
+      ///code for image refer
+      UploadTask uploadTask2 = logoRefernce.putFile(_image!);
+      await Future.value(uploadTask2);
+      var companyImg = await logoRefernce.getDownloadURL();
+
+      ///upload image to the firestore
       DocumentReference ref = FirebaseFirestore.instance
           .collection('Vendor Data')
           .doc(auth.currentUser!.uid);
       ref.set({
         'workadress': workadresscontroller.text.trim(),
-        'imageUrl': imageUrl,
-        'logo': imageUrl1,
+        'imageUrl': companyImg,
+        'logo': logoUrl,
         'docId': ref.id,
-      }).then((value) {
-        flutterToast(msg: "Data update successfully", bgColor: Colors.green,toastLength: Toast.LENGTH_SHORT);
+        'currentUser': FirebaseAuth.instance.currentUser!.uid
       });
     }
   }
@@ -101,7 +114,7 @@ class _AboutDetailState extends State<AboutDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _logo == null
+      appBar: _logoGallery == null
           ? AppBar(
               automaticallyImplyLeading: false,
               iconTheme: IconThemeData(
@@ -126,7 +139,7 @@ class _AboutDetailState extends State<AboutDetail> {
                                   children: [
                                     InkWell(
                                       onTap: () {
-                                        getLogo();
+                                        // getLogo();
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
@@ -144,6 +157,7 @@ class _AboutDetailState extends State<AboutDetail> {
                                   children: [
                                     InkWell(
                                       onTap: () {
+                                        Navigator.pop(context);
                                         getGallery();
                                       },
                                       child: Padding(
@@ -177,7 +191,7 @@ class _AboutDetailState extends State<AboutDetail> {
               brightness: Brightness.light,
               centerTitle: true,
               title: Image.file(
-                _logo!,
+                _logoGallery!,
                 height: getProportionateScreenHeight(270),
               ),
             ),
@@ -204,34 +218,37 @@ class _AboutDetailState extends State<AboutDetail> {
                   ),
                 ),
                 SizedBox(height: 46),
-                _image ==null? Container(
-                  height: 250.0,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    image: DecorationImage(
-                        image: NetworkImage(widget.image),
-                        fit: BoxFit.cover),),
-                  child: InkWell(
-                    onTap: (){
-                      getImage();
-                    },
-                    child: Icon(
-                      Icons.camera_alt_outlined,
-                      color: Colors.white,
-                      size: 60,
-                    ),
-                  ),
-                ): Container(
-                  height: 250.0,
-                  width: double.infinity,
-                  // decoration: BoxDecoration(
-                  //   shape: BoxShape.rectangle,
-                  //   image: DecorationImage(
-                  //       image: Image.file(_image!),
-                  //       fit: BoxFit.cover),),
-                  child: Image.file(_image!),
-                ),
+                _image == null
+                    ? Container(
+                        height: 250.0,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          image: DecorationImage(
+                              image: NetworkImage(widget.image),
+                              fit: BoxFit.cover),
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            getImage();
+                          },
+                          child: Icon(
+                            Icons.camera_alt_outlined,
+                            color: Colors.white,
+                            size: 60,
+                          ),
+                        ),
+                      )
+                    : Container(
+                        height: 250.0,
+                        width: double.infinity,
+                        // decoration: BoxDecoration(
+                        //   shape: BoxShape.rectangle,
+                        //   image: DecorationImage(
+                        //       image: Image.file(_image!),
+                        //       fit: BoxFit.cover),),
+                        child: Image.file(_image!),
+                      ),
                 // widget.image == null
                 //     ? Container(
                 //         height: 200.0,
@@ -268,7 +285,11 @@ class _AboutDetailState extends State<AboutDetail> {
                 ),
                 Center(
                   child: ElevatedButton(
-                    onPressed: submitData,
+                    onPressed: () async {
+                      await submitData().then((value) {
+                        Navigator.pop(context);
+                      });
+                    },
                     child: Text('Submit'),
                   ),
                 ),
@@ -296,5 +317,24 @@ class _AboutDetailState extends State<AboutDetail> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
     );
+  }
+
+  uploadImage() async {
+    ///code for company image url
+    UploadTask uploadTask = imageRef.putFile(_image!);
+    await Future.value(uploadTask);
+    var imageUrl = await imageRef.getDownloadURL();
+
+    ///upload image to the firestore
+    DocumentReference ref = FirebaseFirestore.instance
+        .collection('Vendor Data')
+        .doc(auth.currentUser!.uid);
+    ref.set({
+      'workadress': workadresscontroller.text.trim(),
+      // 'imageUrl': imageUrl,
+      'logo': imageUrl,
+      'docId': ref.id,
+      'currentUser': FirebaseAuth.instance.currentUser!.uid
+    });
   }
 }

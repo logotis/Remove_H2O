@@ -77,27 +77,27 @@ class UserNavigationDrawer extends StatelessWidget {
 
   Selecteditem(BuildContext context, int i) {
     switch (i) {
-      case 1: // main screen
+      case 1: /// main screen
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => UsBody()));
         break;
-      case 2: //contact us screen
+      case 2: ///contact us screen
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => UserContactusBody()));
         break;
-      case 3: //about us screen
+      case 3: ///about us screen
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => userabtpage()));
         break;
-      case 4: // share app screen
+      case 4: /// share app screen
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => UserShareApp()));
         break;
-      case 5: // My Info screen
+      case 5: /// My Info screen
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => Infoscreenbody()));
         break;
-      case 6: // Logout
+      case 6: /// Logout
         auth.signOut();
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: ((context) => SignInScreen())));

@@ -7,8 +7,12 @@ import 'package:remove_h2o/mobile/size_config.dart';
 import 'package:remove_h2o/mobile/ushome/uscontact_us.dart';
 import 'package:remove_h2o/mobile/ushome/user_nav_drawer.dart';
 import 'package:remove_h2o/mobile/vendor_user/userapprovedbody.dart';
+class UserContactusBody extends StatefulWidget {
+  @override
+  State<UserContactusBody> createState() => _UserContactusBodyState();
+}
 
-class UserContactusBody extends StatelessWidget {
+class _UserContactusBodyState extends State<UserContactusBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

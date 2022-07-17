@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:remove_h2o/mobile/navigartion_drawer.dart';
 import 'package:remove_h2o/mobile/size_config.dart';
 import 'package:remove_h2o/mobile/userlist_buttons/approved_usersAccess.dart';
+import 'package:remove_h2o/mobile/userlist_buttons/pending_access.dart';
 
 class Apprrovedbody extends StatefulWidget {
   const Apprrovedbody({Key? key}) : super(key: key);
@@ -115,37 +116,51 @@ class _ApprrovedbodyState extends State<Apprrovedbody> {
                       // itemBuilder: ((context, index) {
                       children:
                           snapshot.data!.docs.map((DocumentSnapshot document) {
-                        Map<String, dynamic> data =
+                        Map<String, dynamic> ds =
                             document.data()! as Map<String, dynamic>;
-                        print(Text(data['firstName']));
+                        print(Text(ds['firstName']));
                         print("//////////////////");
-                        return ApprovedUsers(
+                        return PendingAccess(
                           // email: '',
                           // fname: "",
                           // lname: '',
                           // phoneNo: '',
-                          text: data['firstName'],
-                          // press: () => {
-                          //   showDialog(
-                          //     context: context,
-                          //     builder: (_) => AlertDialog(
-                          //       elevation: 24.0,
-                          //       backgroundColor: Colors.white,
-                          //       title: Text(data['firstName'].toString()),
-                          //       content: Text("Do you want to give access"),
-                          //       actions: <Widget>[
-                          //         FlatButton(
-                          //           child: Text("No"),
-                          //           onPressed: () => Navigator.pop(context),
-                          //         ),
-                          //         FlatButton(
-                          //           child: Text("Yes"),
-                          //           onPressed: () => Navigator.pop(context),
-                          //         ),
-                          //       ],
-                          //     ),
-                          //   ),
-                          // },
+                          text: ds['firstName'],
+                          press: () => {
+                            showDialog(
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                elevation: 24.0,
+                                backgroundColor: Colors.white,
+                                title: Text("Vendor User Info :",style: TextStyle(
+                                  fontWeight: FontWeight.w600
+                                ),),
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    getLeadsDetail(
+                                        name: "Name", data: ds['firstName']),
+                                    getLeadsDetail(
+                                        name: "Email", data: ds['email']),
+                                    getLeadsDetail(
+                                        name: "Contact", data: ds['phoneNo']),
+                                    getLeadsDetail(
+                                        name: "Address", data: ds['Adress']),
+                                  ],
+                                ),
+                                // actions: <Widget>[
+                                //   FlatButton(
+                                //     child: Text("No"),
+                                //     onPressed: () => Navigator.pop(context),
+                                //   ),
+                                //   FlatButton(
+                                //     child: Text("Yes"),
+                                //     onPressed: () => Navigator.pop(context),
+                                //   ),
+                                // ],
+                              ),
+                            ),
+                          },
                         );
                       }).toList());
                   //     return Text('nodata');
@@ -186,5 +201,21 @@ class _ApprrovedbodyState extends State<Apprrovedbody> {
 
         // ),
         );
+  }
+
+  ///get the user info
+  Widget getLeadsDetail({required String name, required String data}) {
+    return Padding(
+        padding: EdgeInsets.symmetric(vertical: 8.8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "$name:",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            ),
+            Text(data)
+          ],
+        ));
   }
 }

@@ -39,17 +39,17 @@ class _VendorBodyState extends State<VendorBody> {
         centerTitle: true,
         title: appbarlogo.isNotEmpty
             ? CircleAvatar(
-                radius: 35,
-                backgroundImage: NetworkImage(appbarlogo),
-                // child: Image.network(
-                //     appbarlogo,
-                //     // height: getProportionateScreenHeight(270),
-                //   ),
-              )
+          radius: 35,
+          backgroundImage: NetworkImage(appbarlogo),
+          // child: Image.network(
+          //     appbarlogo,
+          //     // height: getProportionateScreenHeight(270),
+          //   ),
+        )
             : CircleAvatar(
-                radius: 35,
-                backgroundImage: AssetImage("assets/images/logo.png"),
-              ),
+          radius: 35,
+          backgroundImage: AssetImage("assets/images/logo.png"),
+        ),
       ),
       drawer: NavigationDrawer(),
       body: SingleChildScrollView(

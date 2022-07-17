@@ -63,7 +63,11 @@ class _SignInScreenState extends State<SignInScreen> {
 
           if (doc["approved"] != true) {
             Text('User is pending verification');
-            flutterToast(msg: 'User is pending verification\n Please wait till the verification complete.', bgColor: Colors.red,toastLength: Toast.LENGTH_SHORT);
+            flutterToast(
+                msg:
+                    'User is pending verification\n Please wait till the verification complete.',
+                bgColor: Colors.red,
+                toastLength: Toast.LENGTH_SHORT);
             print("vendor user called");
           } else {
             if (doc['role'] == Roles.superadmin) {
@@ -75,7 +79,6 @@ class _SignInScreenState extends State<SignInScreen> {
                   context, MaterialPageRoute(builder: (_) => SPHome()));
               print("admin");
             } else if (doc['role'] == Roles.vendor) {
-
               Navigator.push(
                   context, MaterialPageRoute(builder: (_) => Home()));
               print("vender");
@@ -211,7 +214,6 @@ class _SignInScreenState extends State<SignInScreen> {
   //     Text('Try again, sign In failed');
   //   }
   // }
-
 
   @override
   Widget build(BuildContext context) {
@@ -350,11 +352,10 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       SocalCard(
                         icon: "assets/icons/facebook-2.svg",
-                        press: () async{
+                        press: () async {
                           // facebookSignin();
-                          final result = await FacebookAuth.i.login(
-                              permissions: ["public_profile", "email"]
-                          );
+                          final result = await FacebookAuth.i
+                              .login(permissions: ["public_profile", "email"]);
                           if (result.status == LoginStatus.success) {
                             final userData = await FacebookAuth.i.getUserData(
                               fields: "email,name",
@@ -362,7 +363,6 @@ class _SignInScreenState extends State<SignInScreen> {
                             setState(() {
                               _userData = userData;
                             });
-
                           }
                         },
                       ),

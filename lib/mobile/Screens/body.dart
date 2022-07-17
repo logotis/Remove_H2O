@@ -35,17 +35,18 @@ class _SplashState extends State<Splash> {
     //   UserCredential userCredential;
     //   FirebaseFirestore.instance
     //       .collection('Users')
-    //       .where('email', isEqualTo: FirebaseAuth.instance.currentUser?.email)
+    //       .where('docId', isEqualTo: FirebaseAuth.instance.currentUser?.uid)
     //       .get()
     //       .then((QuerySnapshot querySnapshot) {
     //     querySnapshot.docs.forEach((doc) {
     //       print(doc["role"]);
-    //       if (doc["approved"] != true) {
-    //         Text('User is pending verification');
-    //         flutterToast(msg: 'User is pending verification\n Please wait till the verification complete.', bgColor: Colors.red,toastLength: Toast.LENGTH_SHORT);
+    //       if (doc.exists == null) {
+    //         Navigator.pushReplacement(
+    //             context, MaterialPageRoute(builder: (context) => SignInScreen()));
+    //         // Text('User is pending verification');
+    //         // flutterToast(msg: 'User is pending verification\n Please wait till the verification complete.', bgColor: Colors.red,toastLength: Toast.LENGTH_SHORT);
     //         print("vendor user called");
     //       } else {
-    //
     //         if (doc['role'] == Roles.superadmin) {
     //           Navigator.push(
     //               context, MaterialPageRoute(builder: (_) => SPHome()));
@@ -62,17 +63,11 @@ class _SplashState extends State<Splash> {
     //           Navigator.push(
     //               context, MaterialPageRoute(builder: (_) => USHome()));
     //           print("user");
-    //         }else if(doc['role']==Roles.random){
-    //           Navigator.pushReplacement(
-    //               context, MaterialPageRoute(builder: (context) => SignInScreen()));
     //         }
     //       }
     //     });
     //   }
     //   );
-    // }else{
-    //
-    // }
     FirebaseAuth.instance.currentUser != null
         ? Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => SPHome()))

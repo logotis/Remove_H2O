@@ -23,14 +23,18 @@ class ShareApp extends StatelessWidget {
         brightness: Brightness.light,
         centerTitle: true,
         title: appbarlogo.isNotEmpty
-            ? Image.network(
-                appbarlogo,
-                height: getProportionateScreenHeight(270),
-              )
-            : Image.asset(
-                "assets/images/logo.png",
-                height: getProportionateScreenHeight(270),
-              ),
+            ? CircleAvatar(
+          radius: 35,
+          backgroundImage: NetworkImage(appbarlogo),
+          // child: Image.network(
+          //     appbarlogo,
+          //     // height: getProportionateScreenHeight(270),
+          //   ),
+        )
+            : const CircleAvatar(
+          radius: 35,
+          backgroundImage: AssetImage("assets/images/logo.png"),
+        ),
       ),
       // drawer: NavigationDrawer(),
       body: SingleChildScrollView(

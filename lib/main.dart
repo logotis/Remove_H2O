@@ -30,7 +30,7 @@ flutterToast({required String msg,required Color bgColor,required Toast toastLen
   Fluttertoast.showToast(
       msg: msg,
       toastLength: toastLength,
-      gravity: ToastGravity.CENTER,
+      gravity: ToastGravity.SNACKBAR,
       timeInSecForIosWeb: 1,
       backgroundColor: bgColor,
       textColor: Colors.white,
@@ -39,6 +39,8 @@ flutterToast({required String msg,required Color bgColor,required Toast toastLen
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     if (kIsWeb || Platform.isMacOS || Platform.isLinux || Platform.isWindows) {

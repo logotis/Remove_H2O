@@ -18,7 +18,7 @@ class abtpage extends StatefulWidget {
 }
 
 class _abtpageState extends State<abtpage> {
-  void getdata() {
+  void getData() {
     FirebaseFirestore.instance
         .collection('Vendor Data')
         .where('docId', isEqualTo: auth.currentUser!.uid)
@@ -37,7 +37,7 @@ class _abtpageState extends State<abtpage> {
 
   @override
   void initState() {
-    getdata();
+    getData();
     super.initState();
   }
 

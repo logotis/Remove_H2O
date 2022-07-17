@@ -26,13 +26,17 @@ class _NewUserSignUpState extends State<NewUserSignUp> {
   final firestore = FirebaseFirestore.instance;
   late final data;
   // late var data;
-  late var vname='';
-  late var vDoc='';
-  late var vpassword='';
-  late var vphoneNum='';
-  late var vaddress='';
-  getCurentUserData()async{
-    var data = await firestore.collection("Users").doc(auth.currentUser!.uid).get().then((value) {
+  late var vname = '';
+  late var vDoc = '';
+  late var vpassword = '';
+  late var vphoneNum = '';
+  late var vaddress = '';
+  getCurentUserData() async {
+    var data = await firestore
+        .collection("Users")
+        .doc(auth.currentUser!.uid)
+        .get()
+        .then((value) {
       setState(() {
         // vname = value.get('docId');
         vDoc = value.data()?['docId'];
@@ -45,18 +49,18 @@ class _NewUserSignUpState extends State<NewUserSignUp> {
   }
 
   void _submitauthform(
-      String email,
-      String fname,
-      String lname,
-      String phoneNo,
-      String password,
-      ) async {
+    String email,
+    String fname,
+    String lname,
+    String phoneNo,
+    String password,
+  ) async {
     UserCredential userCredential;
     try {
       userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
       DocumentReference ref =
-      firestore.collection('Users').doc(auth.currentUser!.uid);
+          firestore.collection('Users').doc(auth.currentUser!.uid);
       await ref.set({
         'currentUserUid': auth.currentUser!.uid,
         'vendorDocId': vDoc,
@@ -70,16 +74,29 @@ class _NewUserSignUpState extends State<NewUserSignUp> {
         'Adress': lname,
         'phoneNo': phoneNo,
         'password': password,
+      }).then((value) async {
+        await FirebaseFirestore.instance
+            .collection('Vendor Data')
+            .doc(vDoc)
+            .collection('venderUsers')
+            .doc(auth.currentUser!.uid)
+            .set({
+          'currentUserId': auth.currentUser!.uid,
+          'vendor':vDoc
+        });
       });
+      print("////////////////////");
     } on FirebaseAuthException catch (err) {
       print(err.message);
     }
   }
+
   @override
   void initState() {
     getCurentUserData();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -174,10 +191,10 @@ class _NewUserSignUpState extends State<NewUserSignUp> {
                     backgroundColor: Colors.black,
                     radius: 16,
                     child: IconButton(
-                      onPressed: () async{
+                      onPressed: () async {
                         Navigator.pop(context);
                         // print('hello
-                       // await getCurentUserData();
+                        // await getCurentUserData();
                       },
                       icon: Padding(
                         padding: const EdgeInsets.only(left: 2.0, bottom: 1),
